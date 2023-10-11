@@ -1,0 +1,17 @@
+.header{
+  width: 100%;
+  padding: 12px;
+  justify-content: flex-end;
+  display: flex;
+  .filter{
+    flex: 1;
+  }
+}
+
+.list-intro{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}

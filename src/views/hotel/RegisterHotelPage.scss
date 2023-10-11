@@ -1,0 +1,16 @@
+.hotel-register{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  .content{
+    width: 500px;
+    height: 700px;
+  }
+  h2{
+    text-align: center;
+  }
+
+}
