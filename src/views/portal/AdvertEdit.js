@@ -58,6 +58,7 @@ function AdvertEdit ({cref,onEditFinish}) {
            'orgId':orgId,
            'channelId':data.channelId,
            'title':data.title,
+           'subtitle':data.subtitle,
            'image':data.image,
            'url':data.url,
            'startTime':data.startTime,
@@ -190,6 +191,19 @@ function AdvertEdit ({cref,onEditFinish}) {
                         ]}
                     >
                         <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="广告副标题"
+                        name="subtitle"
+                        rules={[
+                            {
+                                required: true,
+                                message: '请输入广告副标题!',
+                            },
+                        ]}
+                    >
+                        <Input.TextArea />
                     </Form.Item>
 
 
