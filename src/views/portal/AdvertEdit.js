@@ -210,6 +210,7 @@ function AdvertEdit ({cref,onEditFinish}) {
                     <Form.Item
                         label="广告图片"
                         name="image"
+
                         rules={[
                             {
                                 required: true,
@@ -221,7 +222,7 @@ function AdvertEdit ({cref,onEditFinish}) {
                             form.setFieldsValue({
                                 'image':url
                             });
-                        }}/>
+                        }} />
                     </Form.Item>
 
                     <Form.Item
