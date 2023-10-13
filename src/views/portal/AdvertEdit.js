@@ -1,7 +1,7 @@
 import React, {useState,useImperativeHandle,forwardRef,useEffect} from "react"
 import { Form, Input, notification,Button,Modal,Select} from "antd";
 import {getOrgId, getOrgType} from "../../utils/StorageUtils";
-import {saveAdvert} from "../../api/AdvertAdminApi";
+import {getAdvertChannelPage, saveAdvert} from "../../api/AdvertAdminApi";
 import MyUpload from "../../components/MyUpload/MyUpload";
 import {getChannelPage} from "../../api/ChannelAdminApi";
 
@@ -31,7 +31,7 @@ function AdvertEdit ({cref,onEditFinish}) {
 
     const loadChannelList=async ()=>{
         let type=getOrgType()==0?'':1;
-        let {status,message,data}=await getChannelPage({type:type,page:0,size:50});
+        let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){
             notification.error({message:"系统提示",description:message});

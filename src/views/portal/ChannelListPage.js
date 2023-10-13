@@ -5,10 +5,10 @@ import {notification, Table, Space, Pagination, Popconfirm} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
 import './ChannelListPage.scss'
-import {deleteChannel, getChannelPage} from "../../api/ChannelAdminApi";
 import ChannelEdit from "./ChannelEdit";
 import {createBrowserHistory} from "history";
 import qs from "qs";
+import {deleteAdvertChannel, getAdvertChannelPage} from "../../api/AdvertAdminApi";
 
 
 export default function ChannelListPage () {
@@ -40,7 +40,7 @@ export default function ChannelListPage () {
 
     const loadData=async ({page,size})=>{
         let orgId=getOrgId();
-        let {status,message,data}=await getChannelPage({orgId:orgId,page:page,size:size});
+        let {status,message,data}=await getAdvertChannelPage({orgId:orgId,page:page,size:size});
         console.log(data)
         if(status==0){
             setData(data);
@@ -50,7 +50,7 @@ export default function ChannelListPage () {
     }
 
     const onDeleteChannel=async ({id})=>{
-        let {status,message}=await deleteChannel({id:id});
+        let {status,message}=await deleteAdvertChannel({id:id});
         if(status==0){
             loadData({page:request.page,size:request.size});
         }else{

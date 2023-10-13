@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import './AdvertListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
-import {deleteAdvert, getAdvertPage, setAdvertStatus} from "../../api/AdvertAdminApi";
+import {deleteAdvert, getAdvertChannelPage, getAdvertPage, setAdvertStatus} from "../../api/AdvertAdminApi";
 import AdvertEdit from "./AdvertEdit";
 import {getChannelPage} from "../../api/ChannelAdminApi";
 
@@ -89,7 +89,7 @@ export default function AdvertListPage () {
 
     const loadChannelList=async ()=>{
         let type=getOrgType()==0?'':1;
-        let {status,message,data}=await getChannelPage({type:type,page:0,size:50});
+        let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){
             notification.error({message:"系统提示",description:message});

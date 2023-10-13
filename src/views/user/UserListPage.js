@@ -48,12 +48,12 @@ export default function UserListPage () {
     }
 
     const onDeleteChannel=async ({id})=>{
-        let {status,message}=await deleteChannel({id:id});
-        if(status==0){
-            loadData({page:request.page,size:request.size});
-        }else{
-            notification.error({message:"系统提示",description:message});
-        }
+        // let {status,message}=await deleteChannel({id:id});
+        // if(status==0){
+        //     loadData({page:request.page,size:request.size});
+        // }else{
+        //     notification.error({message:"系统提示",description:message});
+        // }
     }
 
     const onPageChange=(page,pageSize)=>{

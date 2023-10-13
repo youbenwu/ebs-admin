@@ -1,7 +1,7 @@
 import React, {useState,useImperativeHandle,forwardRef} from "react"
 import { Form, Input, notification,Button,Modal} from "antd";
 import {getOrgId} from "../../utils/StorageUtils";
-import {saveChannel} from "../../api/ChannelAdminApi";
+import {saveAdvertChannel} from "../../api/AdvertAdminApi";
 
 function ChannelEdit ({cref,onEditFinish}) {
 
@@ -34,7 +34,7 @@ function ChannelEdit ({cref,onEditFinish}) {
 
     const onFinish =async (values) => {
         setLoading(true);
-        let {status,message}=await saveChannel(values);
+        let {status,message}=await saveAdvertChannel(values);
         setLoading(false);
         if(status==0){
             notification.info({message:"系统提示",description:message});
