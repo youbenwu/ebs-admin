@@ -118,7 +118,7 @@ function AdvertEdit ({cref,onEditFinish}) {
                     form={form}
                     name="basic"
                     labelCol={{
-                        span: 4,
+                        span: 5,
                     }}
                     wrapperCol={{
                         span: 18,
