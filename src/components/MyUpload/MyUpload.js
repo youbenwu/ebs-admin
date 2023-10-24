@@ -38,19 +38,18 @@ export default function MyUpload ({onChange,image}) {
             return;
         }
         if (info.file.status === 'done') {
-            //console.log(info);
             if(info.file.response.status==0){
                 onChange(info.file.response.data.file[0]);
-                // Get this url from response in real world.
                 getBase64(info.file.originFileObj, (url) => {
-                    setLoading(false);
                     setImageUrl(url);
                 });
             }else{
                 message.error(info.file.response.message);
-                setLoading(false);
             }
+        }else if (info.file.status === 'error') {
+            message.error(`${info.file.name} 文件上传失败.`);
         }
+        setLoading(false);
     };
     const uploadButton = (
         <div>

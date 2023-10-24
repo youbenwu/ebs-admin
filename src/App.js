@@ -23,6 +23,7 @@ import HotelCustomerListPage from "./views/hotel/HotelCustomerListPage";
 import HotelWorkListPage from "./views/hotel/HotelWorkListPage";
 import HotelPage from "./views/hotel/HotelPage";
 import HotelStayListPage from "./views/hotel/HotelStayListPage";
+import ProductListPage from "./views/mall/product/ProductListPage";
 
 
 
@@ -34,7 +35,11 @@ function App() {
         <Route path='/hotel/register' element={<RegisterHotelPage/>}/>
         <Route path='/' element={<MainPage/>}>
             <Route path='/home' element={<HomePage/>}/>
-            <Route path='/mall/order/ticketorders' element={<NoPage/>}/>
+            <Route path='/mall/order/list' element={<NoPage/>}/>
+            <Route path='/mall/product/list' element={<ProductListPage/>}/>
+            <Route path='/mall/product/category/list' element={<NoPage/>}/>
+            <Route path='/mall/shop/product/category/list' element={<NoPage/>}/>
+            <Route path='/mall/shop/product/list' element={<NoPage/>}/>
               <Route path='/org/info' element={<OrgPage/>}/>
               <Route path='/org/edit' element={<OrgEditPage/>}/>
               <Route path='/org/accounts' element={<AccountListPage/>}/>

@@ -9,7 +9,7 @@ import {getSysId} from "../../utils/StorageUtils";
 
 
 const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/c/font_4273593_gpnjwaldidb.js', // 在 iconfont.cn 上生成
+    scriptUrl: '//at.alicdn.com/t/c/font_4273593_485wtlr0vzy.js', // 在 iconfont.cn 上生成
 });
 const { Header, Sider, Content } = Layout;
 
@@ -38,6 +38,8 @@ export default function MainPage(){
         '/org':<MyIcon type="icon-organization"/>,
         '/message':<MyIcon type="icon-message"/>,
         '/portal':<MyIcon type="icon-portal"/>,
+        '/mall/product':<MyIcon type="icon-product"/>,
+        '/mall/shop':<MyIcon type="icon-shop"/>,
     }
 
     const loadMenus = async () => {
