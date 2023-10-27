@@ -3,7 +3,6 @@ import { Form, Input, notification,Button,Modal,Select,Space} from "antd";
 import {getOrgId, getOrgType} from "../../utils/StorageUtils";
 import {getAdvertChannelPage, saveAdvert} from "../../api/AdvertAdminApi";
 import MyUpload from "../../components/MyUpload/MyUpload";
-import {getChannelPage} from "../../api/ChannelAdminApi";
 import MyUploadFile from "../../components/MyUpload/MyUploadFile";
 
 

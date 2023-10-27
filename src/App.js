@@ -24,6 +24,7 @@ import HotelWorkListPage from "./views/hotel/HotelWorkListPage";
 import HotelPage from "./views/hotel/HotelPage";
 import HotelStayListPage from "./views/hotel/HotelStayListPage";
 import ProductListPage from "./views/mall/product/ProductListPage";
+import DataStatsListPage from "./views/stats/DataStatsListPage";
 
 
 
@@ -40,24 +41,25 @@ function App() {
             <Route path='/mall/product/category/list' element={<NoPage/>}/>
             <Route path='/mall/shop/product/category/list' element={<NoPage/>}/>
             <Route path='/mall/shop/product/list' element={<NoPage/>}/>
-              <Route path='/org/info' element={<OrgPage/>}/>
-              <Route path='/org/edit' element={<OrgEditPage/>}/>
-              <Route path='/org/accounts' element={<AccountListPage/>}/>
-              <Route path='/org/roles' element={<RoleListPage/>}/>
-              <Route path='/portal/channels' element={<ChannelListPage/>}/>
-              <Route path='/portal/adverts' element={<AdvertListPage/>}/>
-              <Route path='/user/users' element={<UserListPage/>}/>
+            <Route path='/org/info' element={<OrgPage/>}/>
+            <Route path='/org/edit' element={<OrgEditPage/>}/>
+            <Route path='/org/accounts' element={<AccountListPage/>}/>
+            <Route path='/org/roles' element={<RoleListPage/>}/>
+            <Route path='/portal/channels' element={<ChannelListPage/>}/>
+            <Route path='/portal/adverts' element={<AdvertListPage/>}/>
+            <Route path='/user/users' element={<UserListPage/>}/>
 
-              <Route path='/message/list' element={<MsgListPage/>}/>
-              <Route path='/message/send' element={<MsgSendPage/>}/>
-              <Route path='/hotel/hotels' element={<HotelListPage/>}/>
-              <Route path='/hotel/devices' element={<HotelDeviceListPage/>}/>
-              <Route path='/hotel/roomtypes' element={<HotelRoomTypeListPage/>}/>
-             <Route path='/hotel/rooms' element={<HotelRoomListPage/>}/>
-             <Route path='/hotel/customers' element={<HotelCustomerListPage/>}/>
+            <Route path='/message/list' element={<MsgListPage/>}/>
+            <Route path='/message/send' element={<MsgSendPage/>}/>
+            <Route path='/hotel/hotels' element={<HotelListPage/>}/>
+            <Route path='/hotel/devices' element={<HotelDeviceListPage/>}/>
+            <Route path='/hotel/roomtypes' element={<HotelRoomTypeListPage/>}/>
+            <Route path='/hotel/rooms' element={<HotelRoomListPage/>}/>
+            <Route path='/hotel/customers' element={<HotelCustomerListPage/>}/>
             <Route path='/hotel/works' element={<HotelWorkListPage/>}/>
             <Route path='/hotel/info' element={<HotelPage/>}/>
             <Route path='/hotel/stays' element={<HotelStayListPage/>}/>
+            <Route path='/portal/data/stats/list' element={<DataStatsListPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
