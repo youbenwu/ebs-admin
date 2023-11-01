@@ -37,3 +37,11 @@ export const getTargetId=()=>{
 export const getSysId=()=>{
     return localStorage.getItem("sysId");
 }
+
+export const getHotel=()=>{
+    return JSON.parse(localStorage.getItem("hotel"))
+}
+
+export const saveHotel=(data)=>{
+    return localStorage.setItem("hotel",JSON.stringify(data));
+}

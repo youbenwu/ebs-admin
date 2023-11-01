@@ -1,6 +1,7 @@
 import React, {useState,useImperativeHandle} from "react"
-import { Space,Button,Modal,Radio,Select} from "antd";
-import {saveSys} from "../../utils/StorageUtils";
+import { Space,Button,Modal,Radio,Select ,notification} from "antd";
+import {saveSys , saveHotel} from "../../utils/StorageUtils";
+import {getHotel} from "../../api/HotelAdminApi";
 
 export default function SelectSys ({cref,onOk}) {
 
@@ -36,9 +37,19 @@ export default function SelectSys ({cref,onOk}) {
             console.log(v);
             saveSys(v);
             onOk(true);
+            loadData(v.targetId)
             setOpen(false);
         }
     };
+
+    const loadData=async (id)=>{
+        let {status,message,data}=await getHotel({id});
+        if(status==0){
+            saveHotel(data)
+        }else{
+            notification.error({message:"系统提示",description:message});
+        }
+    }
 
 
     return (

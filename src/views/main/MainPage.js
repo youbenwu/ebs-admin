@@ -81,7 +81,7 @@ export default function MainPage(){
     return (
 
         <Layout className="layout" >
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+            <Sider trigger={null} collapsible collapsed={collapsed} className='sider'>
                 <div className="demo-logo-vertical" />
                 <Menu
                     theme="dark"
@@ -92,7 +92,7 @@ export default function MainPage(){
                     onSelect={onSelect}
                 />
             </Sider>
-            <Layout>
+            <Layout className='page-r'>
                 <Header
                     style={{
                         padding: 0,
@@ -114,7 +114,8 @@ export default function MainPage(){
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        height: '100%',
+                        // height: 'auto',
+                        minHeight:'auto',
                         background: colorBgContainer,
                     }}
                 >
