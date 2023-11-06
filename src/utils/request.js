@@ -1,5 +1,8 @@
 import axios from  'axios'
 import {baseUrl} from "../config/config";
+import { createBrowserHistory } from 'history'
+import {notification} from "antd";
+const history = createBrowserHistory()
 
 
 const instance=axios.create({
@@ -25,6 +28,12 @@ instance.interceptors.request.use(function (config) {
 
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
+    if(response.data.status=='3'){
+        // notification.error({message:"系统提示",description:'用户身份过期，请重新登录'});
+        localStorage.clear()
+        history.push("/login")
+        history.go();
+    }
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     return response;

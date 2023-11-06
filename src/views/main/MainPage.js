@@ -77,7 +77,10 @@ export default function MainPage(){
     const onSelect=({key})=>{
         navigate(key);
     }
-
+    const outLogin=()=>{
+        localStorage.clear()
+        navigate('/login');
+    }
     return (
 
         <Layout className="layout" >
@@ -97,6 +100,11 @@ export default function MainPage(){
                     style={{
                         padding: 0,
                         background: colorBgContainer,
+                        display:'flex',
+                        justifyContent:'space-between',
+                        alignItems:'center',
+                        paddingRight:'20px',
+                        width:'100%'
                     }}
                 >
                     <Button
@@ -109,6 +117,7 @@ export default function MainPage(){
                             height: 64,
                         }}
                     />
+                    <Button onClick={outLogin}>退出登录</Button>
                 </Header>
                 <Content
                     style={{

@@ -49,6 +49,7 @@ export default function ShopList() {
       keyword,
       size,
       page: page - 1,
+      shopId: getHotel().shopId,
     });
     setDatas(data);
   };
@@ -74,10 +75,12 @@ export default function ShopList() {
       key: "stock",
     },
     {
-      title: "上架状态",
+      title: "状态",
       key: "onSell",
       render: (_, record, index) => (
         <Switch
+          checkedChildren="已上架"
+          unCheckedChildren="未上架"
           checked={record.onSell}
           key={record.id}
           onChange={(checked) => {
