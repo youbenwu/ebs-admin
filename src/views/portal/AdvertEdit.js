@@ -4,6 +4,7 @@ import {getOrgId, getOrgType} from "../../utils/StorageUtils";
 import {getAdvertChannelPage, saveAdvert} from "../../api/AdvertAdminApi";
 import MyUpload from "../../components/MyUpload/MyUpload";
 import MyUploadFile from "../../components/MyUpload/MyUploadFile";
+import MyUploadList from "../../components/MyUpload/MyUploadList";
 
 
 function AdvertEdit ({cref,onEditFinish}) {
@@ -22,6 +23,8 @@ function AdvertEdit ({cref,onEditFinish}) {
     const [qrCode, setQrCode] = useState(null);
 
     const [video, setVideo] = useState(null);
+
+    const [images, setImages] = useState([]);
 
     useEffect(()=>{
         loadChannelList().then(()=>{});
@@ -53,19 +56,19 @@ function AdvertEdit ({cref,onEditFinish}) {
         setOptions(options);
     }
 
-    //广告类型 PPV--普通图片视频广告 PPC--带广告链接 PPA--带二维码
+    //广告类型 CPM--普通图片视频广告 CPC--带广告链接 CPA--带二维码
     const types=[
         {
-            value:'PPV',
-            label:'PPV',
+            value:'CPM',
+            label:'CPM',
         },
         {
-            value:'PPC',
-            label:'PPC',
+            value:'CPC',
+            label:'CPC',
         },
         {
-            value:'PPA',
-            label:'PPA',
+            value:'CPA',
+            label:'CPA',
         }
     ];
 
@@ -73,9 +76,10 @@ function AdvertEdit ({cref,onEditFinish}) {
    const openModel=({data})=>{
        setOpen(true);
        let orgId=data.orgId?data.orgId:getOrgId();
-       data.advertType=data.advertType?data.advertType:'PPV';
+       data.advertType=data.advertType?data.advertType:'CPM';
        setChannelId(data.channelId);
-       setImage(data.image)
+       //setImage(data.image)
+       setImages(getImagesList(data.images?data.images:data.image));
        setQrCode(data.qrCode)
        setVideo(data.video)
        setAdvertType(data.advertType)
@@ -86,7 +90,8 @@ function AdvertEdit ({cref,onEditFinish}) {
            'advertType':data.advertType,
            'title':data.title,
            'subtitle':data.subtitle,
-           'image':data.image,
+           //'image':data.image,
+           'images':data.images?data.images:data.image,
            'url':data.url,
            'startTime':data.startTime,
            'endTime':data.endTime,
@@ -97,6 +102,7 @@ function AdvertEdit ({cref,onEditFinish}) {
     const [form] = Form.useForm();
 
     const onFinish =async (values) => {
+        console.log(values);
         setLoading(true);
         let {status,message}=await saveAdvert(values);
         setLoading(false);
@@ -124,6 +130,29 @@ function AdvertEdit ({cref,onEditFinish}) {
                 console.log('Validate Failed:', info);
             });
     };
+
+    const getImagesStr=(images)=>{
+        var str="";
+        images.forEach(t=>{
+            str+=","+t.url;
+        })
+        if(str.length>0){
+            str=str.substr(1);
+        }
+        return str;
+    }
+
+    const getImagesList=(str)=>{
+        if(!str)
+            return [];
+        var images=[];
+        str.split(",").forEach(t=>{
+            images.push({
+                url:t
+            });
+        })
+        return images;
+    }
 
     return (
         <>
@@ -255,32 +284,56 @@ function AdvertEdit ({cref,onEditFinish}) {
                     </Form.Item>
 
 
+                    {/*<Form.Item*/}
+                    {/*    label="广告图片"*/}
+                    {/*    name="image"*/}
+
+                    {/*    rules={[*/}
+                    {/*        {*/}
+                    {/*            required: true,*/}
+                    {/*            message: '请输入链接或上传广告图片!',*/}
+                    {/*        },*/}
+                    {/*    ]}*/}
+                    {/*>*/}
+                    {/*    <Space direction="vertical" style={{width:'100%'}}>*/}
+                    {/*        <Input.TextArea value={image} placeholder="请输入链接或上传广告图片!"  onChange={(e)=>{*/}
+                    {/*            setImage(e.target.value)*/}
+                    {/*            form.setFieldsValue({*/}
+                    {/*                'image':e.target.value*/}
+                    {/*            });*/}
+                    {/*        }}/>*/}
+                    {/*        <MyUpload image={image} onChange={(url)=>{*/}
+                    {/*            setImage(url)*/}
+                    {/*            form.setFieldsValue({*/}
+                    {/*                'image':url*/}
+                    {/*            });*/}
+                    {/*        }} />*/}
+                    {/*    </Space>*/}
+
+                    {/*</Form.Item>*/}
+
+
                     <Form.Item
                         label="广告图片"
-                        name="image"
-
+                        name="images"
                         rules={[
                             {
                                 required: true,
-                                message: '请输入链接或上传广告图片!',
+                                message: "请上传广告图片!",
                             },
                         ]}
                     >
-                        <Space direction="vertical" style={{width:'100%'}}>
-                            <Input.TextArea value={image} placeholder="请输入链接或上传广告图片!"  onChange={(e)=>{
-                                setImage(e.target.value)
-                                form.setFieldsValue({
-                                    'image':e.target.value
-                                });
-                            }}/>
-                            <MyUpload image={image} onChange={(url)=>{
-                                setImage(url)
-                                form.setFieldsValue({
-                                    'image':url
-                                });
-                            }} />
+                        <Space direction="vertical" style={{ width: "100%" }}>
+                            <MyUploadList
+                                num={3}
+                                images={images}
+                                onChange={(v) => {
+                                    form.setFieldsValue({
+                                        images: getImagesStr(v),
+                                    });
+                                }}
+                            />
                         </Space>
-
                     </Form.Item>
 
                     <Form.Item
@@ -313,7 +366,7 @@ function AdvertEdit ({cref,onEditFinish}) {
 
 
                     {
-                        advertType=="PPC"?(<Form.Item
+                        advertType=="CPC"?(<Form.Item
                                 label="广告URL"
                                 name="url"
                                 rules={[
@@ -331,7 +384,7 @@ function AdvertEdit ({cref,onEditFinish}) {
 
 
                     {
-                        advertType=="PPA"?(<Form.Item
+                        advertType=="CPA"?(<Form.Item
                             label="广告二维码"
                             name="qrCode"
 

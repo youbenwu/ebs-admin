@@ -27,6 +27,7 @@ import ProductListPage from "./views/mall/product/ProductListPage";
 import DataStatsListPage from "./views/stats/DataStatsListPage";
 import ShopCategoryList from "./views/mall/shop/ShopCategoryList";
 import ShopList from "./views/mall/shop/ShopList";
+import MenuListPage from "./views/org/menu/MenuListPage";
 
 
 
@@ -64,6 +65,7 @@ function App() {
             <Route path='/hotel/stays' element={<HotelStayListPage/>}/>
             <Route path='/portal/data/stats/list' element={<DataStatsListPage/>}/>
         </Route>
+        <Route path='/org/menus' element={<MenuListPage/>}/>
       </Routes>
     </BrowserRouter>
   );

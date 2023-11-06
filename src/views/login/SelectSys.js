@@ -37,7 +37,9 @@ export default function SelectSys ({cref,onOk}) {
             console.log(v);
             saveSys(v);
             onOk(true);
-            loadData(v.targetId)
+            if(v.type==6) {
+                loadData(v.targetId)
+            }
             setOpen(false);
         }
     };
