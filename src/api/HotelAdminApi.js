@@ -57,7 +57,7 @@ export const getHotelList=async (params)=>{
 // /api/admin/hotel/get
 // 获取酒店信息
 
-export const getHotel=async (params)=>{
+export const getHotelInfo=async (params)=>{
     let {data}=await axios.postForm('/api/admin/hotel/get',params);
     return data;
 }

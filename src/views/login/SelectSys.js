@@ -1,7 +1,7 @@
 import React, {useState,useImperativeHandle} from "react"
 import { Space,Button,Modal,Radio,Select ,notification} from "antd";
 import {saveOrg , saveHotel} from "../../utils/StorageUtils";
-import {getHotel} from "../../api/HotelAdminApi";
+import {getHotelInfo} from "../../api/HotelAdminApi";
 
 export default function SelectSys ({cref,onOk}) {
 
@@ -46,7 +46,7 @@ export default function SelectSys ({cref,onOk}) {
     };
 
     const loadData=async (id)=>{
-        let {status,message,data}=await getHotel({id});
+        let {status,message,data}=await getHotelInfo({id});
         if(status==0){
             saveHotel(data)
         }else{

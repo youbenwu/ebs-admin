@@ -2,9 +2,10 @@ import {useState, useEffect, useRef} from "react"
 import {notification,Space} from "antd"
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
-import {getHotel} from "../../api/HotelAdminApi"
 import HotelEdit from "./HotelEdit"
 import './HotelPage.scss'
+import {getHotel} from "../../utils/StorageUtils";
+import {getHotelInfo} from "../../api/HotelAdminApi";
 
 export default function HotelPage () {
     const navigate=useNavigate();
@@ -18,7 +19,7 @@ export default function HotelPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let {status,message,data}=await getHotel({id:getHotel().id});
+        let {status,message,data}=await getHotelInfo({id:getHotel().id});
         if(status==0){
             setData(data);
         }else{

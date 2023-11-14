@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import {$login} from "../../api/UserApi";
 import {saveHotel, saveOrg, saveUser} from "../../utils/StorageUtils";
 import SelectSys from "./SelectSys";
-import {getHotel} from "../../api/HotelAdminApi";
+import {getHotelInfo} from "../../api/HotelAdminApi";
 
 export default function LoginPage(){
     const navigate=useNavigate();
@@ -38,7 +38,7 @@ export default function LoginPage(){
     };
 
     const loadData=async (id)=>{
-        let {status,message,data}=await getHotel({id});
+        let {status,message,data}=await getHotelInfo({id});
         if(status==0){
             saveHotel(data)
         }else{
