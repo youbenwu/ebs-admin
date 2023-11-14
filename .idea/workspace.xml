@@ -1,81 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39759eed-de6a-4830-a364-50d1ecfa3045" name="Default Changelist" comment="e">
-      <change afterPath="$PROJECT_DIR$/src/api/MenuApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/PermissionAdminApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/PermissionApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/ProductAdminApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/ProductCategoryAdminApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/ProductTypeAdminApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/SysAdminApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/common/TableKeywordFilterView.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/bstype/ProductBsTypeEdit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/bstype/ProductBsTypeListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/category/ProductCategoryEdit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/category/ProductCategoryListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/category/ProductCategoryListPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/list/ProductEditPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/list/ProductListPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/type/ProductTypeEdit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/type/ProductTypeListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/mall/product/type/ProductTypeListPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/org/menu/MenuEdit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/org/menu/MenuListPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/sys/list/SysListPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/sys/list/SysListPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/sys/list/SysSetMenuList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/sys/list/SysSetPermissionList.js" afterDir="false" />
+    <list default="true" id="39759eed-de6a-4830-a364-50d1ecfa3045" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/OrgApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/OrgApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyUpload/MyUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyUpload/MyUpload.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/StorageUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StorageUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelCustomerEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelCustomerEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelCustomerListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelCustomerListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelDeviceListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelDeviceListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelRoomEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelRoomEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelRoomListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelRoomListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelRoomStatusEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelRoomStatusEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelRoomTypeEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelRoomTypeEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelRoomTypeListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelRoomTypeListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelStayEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelStayEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelStayListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelStayListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelStayStatusEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelStayStatusEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelWorkEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelWorkEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelWorkListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelWorkListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelWorkStatusEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelWorkStatusEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/login/SelectSys.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/SelectSys.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/main/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/main/MainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/mall/product/ProductCategoryEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/sys/list/SysEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/mall/product/ProductCategoryListPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/mall/product/ProductCategoryListPage.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/mall/product/ProductCategoryTable.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/mall/product/ProductListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/mall/product/list/ProductListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/msg/MsgListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/msg/MsgListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/msg/MsgSendPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/msg/MsgSendPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/AccountEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/AccountEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/AccountListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/AccountListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/OrgEditPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/OrgEditPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/OrgPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/OrgPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/RoleEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/RoleEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/RoleListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/RoleListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/SelectMenuList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/SelectMenuList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/SelectPerList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/SelectPerList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/org/menu/MenuListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/org/menu/MenuListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/portal/AdvertEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/portal/AdvertEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/portal/AdvertListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/portal/AdvertListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/portal/ChannelEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/portal/ChannelEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/portal/ChannelListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/portal/ChannelListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/UserListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/UserListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/UserRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/UserRegister.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/user/UserRegisterPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/UserRegisterPage.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -125,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/mall/product/list/ProductEditPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+            <state relative-caret-position="69">
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -137,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/config/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="15">
+              <caret line="1" column="48" lean-forward="true" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -286,9 +214,9 @@
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/views/mall/product/list/ProductListPage.js" />
         <option value="$PROJECT_DIR$/src/views/msg/MsgSendPage.js" />
-        <option value="$PROJECT_DIR$/src/config/config.js" />
         <option value="$PROJECT_DIR$/src/api/ProductAdminApi.js" />
         <option value="$PROJECT_DIR$/src/views/mall/product/list/ProductEditPage.js" />
+        <option value="$PROJECT_DIR$/src/config/config.js" />
       </list>
     </option>
   </component>
@@ -493,7 +421,7 @@
       <workItem from="1698196564999" duration="11102000" />
       <workItem from="1698817299294" duration="19407000" />
       <workItem from="1698938910147" duration="59574000" />
-      <workItem from="1699234966990" duration="43026000" />
+      <workItem from="1699234966990" duration="43065000" />
     </task>
     <task id="LOCAL-00001" summary="e">
       <created>1697008807079</created>
@@ -565,11 +493,18 @@
       <option name="project" value="LOCAL" />
       <updated>1698976502696</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="e">
+      <created>1699942809775</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699942809776</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356579000" />
+    <option name="totallyTimeSpent" value="356618000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -581,9 +516,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1431" height="824" extended-state="1" />
+    <frame x="0" y="25" width="1431" height="824" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30165586" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30165586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -594,7 +530,7 @@
       <window_info id="npm" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.3181818" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.3181818" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3989432" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1021,13 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/msg/MsgListPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1059,11 +988,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/mall/product/list/ProductEditPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+        <state relative-caret-position="69">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="48" lean-forward="true" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
         </state>
       </provider>
     </entry>
