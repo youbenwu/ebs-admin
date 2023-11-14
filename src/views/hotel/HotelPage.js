@@ -19,7 +19,9 @@ export default function HotelPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let {status,message,data}=await getHotelInfo({id:getHotel().id});
+        let hotel=getHotel();
+        console.log(hotel)
+        let {status,message,data}=await getHotelInfo({id:hotel.id});
         if(status==0){
             setData(data);
         }else{
