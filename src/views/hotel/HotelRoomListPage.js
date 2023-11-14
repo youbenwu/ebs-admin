@@ -7,18 +7,9 @@ import {createBrowserHistory} from "history";
 import qs from "qs";
 import {
     deleteHotelRoom,
-    deleteHotelRoomType,
-    getHotelDevicePage,
-    getHotelPage,
     getHotelRoomPage,
-    getHotelRoomTypePage
 } from "../../api/HotelAdminApi";
-import HotelDeviceEdit from "./HotelDeviceEdit";
-import {getTargetId} from "../../utils/StorageUtils";
-import HotelRoomTypeEdit from "./HotelRoomTypeEdit";
-import {deleteChannel} from "../../api/ChannelAdminApi";
-import HotelEdit from "./HotelEdit";
-import HotelStatusEdit from "./HotelStatusEdit";
+import {getHotel} from "../../utils/StorageUtils";
 import HotelRoomEdit from "./HotelRoomEdit";
 import HotelRoomStatusEdit from "./HotelRoomStatusEdit";
 
@@ -31,7 +22,7 @@ export default function HotelRoomListPage () {
     const infoEdit=useRef();
     const statusEdit=useRef();
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getTargetId()});
+    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getHotel()?.id});
 
 
     const [form] = Form.useForm();

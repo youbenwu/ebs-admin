@@ -1,11 +1,8 @@
-import {useState,useEffect,useRef} from "react"
+import {useState,useEffect} from "react"
 
-import {getOrgId} from "../../utils/StorageUtils";
-import {notification, Table, Space, Pagination, Popconfirm} from "antd";
-import {Button} from 'antd'
+import {notification, Table, Pagination} from "antd";
 import {useNavigate} from 'react-router-dom'
 import './UserListPage.scss'
-import {deleteChannel, getChannelPage} from "../../api/ChannelAdminApi";
 import {createBrowserHistory} from "history";
 import qs from "qs";
 import {getUserPage} from "../../api/UserAdminApi";

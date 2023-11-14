@@ -1,13 +1,6 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {saveRole} from "../../api/OrgAdminApi";
+import React, {useState,useImperativeHandle} from "react"
 import {Form, Input, notification, Space, Button, Modal, Select} from "antd";
-import {getOrgId} from "../../utils/StorageUtils";
-import MyUpload from "../../components/MyUpload/MyUpload";
 import {
-    registerHotel,
-    saveHotel,
-    setHotelRoomStatus,
-    setHotelStatus,
     setHotelWorkOrderStatus
 } from "../../api/HotelAdminApi";
 

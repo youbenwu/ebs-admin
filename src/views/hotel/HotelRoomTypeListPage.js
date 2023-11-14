@@ -5,11 +5,9 @@ import {useNavigate} from 'react-router-dom'
 import './HotelRoomTypeListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
-import {deleteHotelRoomType, getHotelDevicePage, getHotelRoomTypePage} from "../../api/HotelAdminApi";
-import HotelDeviceEdit from "./HotelDeviceEdit";
-import {getTargetId} from "../../utils/StorageUtils";
+import {deleteHotelRoomType, getHotelRoomTypePage} from "../../api/HotelAdminApi";
+import {getHotel} from "../../utils/StorageUtils";
 import HotelRoomTypeEdit from "./HotelRoomTypeEdit";
-import {deleteChannel} from "../../api/ChannelAdminApi";
 
 
 export default function HotelRoomTypeListPage () {
@@ -49,8 +47,8 @@ export default function HotelRoomTypeListPage () {
 
 
     const loadData=async ()=>{
-        var hotelId=getTargetId();
-        let {status,message,data}=await getHotelRoomTypePage({...request,hotelId:hotelId?hotelId:'',sort:"updateTime,desc"});
+
+        let {status,message,data}=await getHotelRoomTypePage({...request,hotelId:getHotel()?.id,sort:"updateTime,desc"});
         console.log(data)
         if(status==0){
             setData(data);

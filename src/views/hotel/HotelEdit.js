@@ -1,9 +1,7 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {saveRole} from "../../api/OrgAdminApi";
-import { Form, Input, notification, Space,Button,Modal} from "antd";
-import {getOrgId} from "../../utils/StorageUtils";
+import React, {useState,useImperativeHandle} from "react"
+import { Form, Input, notification,Button,Modal} from "antd";
 import MyUpload from "../../components/MyUpload/MyUpload";
-import {registerHotel, saveHotel} from "../../api/HotelAdminApi";
+import {saveHotel} from "../../api/HotelAdminApi";
 
 function HotelEdit ({cref,onEditFinish}) {
 

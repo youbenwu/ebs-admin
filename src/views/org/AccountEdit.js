@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
 import {getMenuListBySys, getRoleList, saveAccount, saveRole} from "../../api/OrgAdminApi";
 import {Form, Input, notification, Space, Button, Modal, Cascader} from "antd";
-import {getOrgId, getSysId, getUserId} from "../../utils/StorageUtils";
+import {getOrg} from "../../utils/StorageUtils";
 
 const { SHOW_CHILD } = Cascader;
 
@@ -35,10 +35,9 @@ export default function AccountEdit ({cref,onEditFinish}) {
 
 
        setOpen(true);
-       let orgId=data.orgId?data.orgId:getOrgId();
        form.setFieldsValue({
            'id':data.id,
-           'orgId':orgId,
+           'orgId':data.orgId??getOrg().orgId,
            'userId':data.userId,
            'name':data.name,
            'phone':data.phone,
@@ -48,7 +47,7 @@ export default function AccountEdit ({cref,onEditFinish}) {
    }
 
     const loadRoleData= async ()=>{
-        let {status,message,data}=await getRoleList({orgId:getOrgId()});
+        let {status,message,data}=await getRoleList({orgId:getOrg().orgId});
 
         if(status==0){
             data=data.map(t=>{

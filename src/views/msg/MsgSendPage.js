@@ -4,17 +4,17 @@ import { Button, Form, Input,notification,Space } from 'antd';
 import {useNavigate} from 'react-router-dom'
 import MyUpload from "../../components/MyUpload/MyUpload";
 import {sendMessage} from "../../api/MessageAdminApi";
-import {getOrgId, getUserId} from "../../utils/StorageUtils";
+import {getOrg,getUser} from "../../utils/StorageUtils";
 
 export default function MsgSendPage(){
     const navigate=useNavigate();
     const [form] = Form.useForm();
 
     useEffect(()=>{
-        let orgId=getOrgId();
+        let orgId=getOrg().orgType==0?'':getOrg().orgId;
         form.setFieldsValue({
-            'orgId':orgId==0?'':orgId,
-            'fromId':getUserId(),
+            'orgId':orgId,
+            'fromId':getUser().id,
         });
     },[])
 

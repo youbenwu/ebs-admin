@@ -1,5 +1,5 @@
 import {useState,useEffect,useRef} from "react"
-import {notification, Table, Space, Pagination, Tabs, Form, Input, Popconfirm} from "antd";
+import {notification, Table, Space, Pagination, Tabs, Form, Input} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
 import './HotelStayListPage.scss'
@@ -7,23 +7,9 @@ import {createBrowserHistory} from "history";
 import moment from 'moment'
 import qs from "qs";
 import {
-    deleteHotelRoom,
-    deleteHotelRoomType, deleteHotelStay, deleteHotelWorkOrder,
-    getHotelDevicePage,
-    getHotelPage,
-    getHotelRoomPage,
-    getHotelRoomTypePage, getHotelStayPage, getHotelWorkOrderPage
+    deleteHotelStay, getHotelStayPage
 } from "../../api/HotelAdminApi";
-import HotelDeviceEdit from "./HotelDeviceEdit";
-import {getTargetId} from "../../utils/StorageUtils";
-import HotelRoomTypeEdit from "./HotelRoomTypeEdit";
-import {deleteChannel} from "../../api/ChannelAdminApi";
-import HotelEdit from "./HotelEdit";
-import HotelStatusEdit from "./HotelStatusEdit";
-import HotelRoomEdit from "./HotelRoomEdit";
-import HotelRoomStatusEdit from "./HotelRoomStatusEdit";
-import HotelWorkEdit from "./HotelWorkEdit";
-import HotelWorkStatusEdit from "./HotelWorkStatusEdit";
+import {getHotel} from "../../utils/StorageUtils";
 import HotelStayEdit from "./HotelStayEdit";
 import HotelStayStatusEdit from "./HotelStayStatusEdit";
 
@@ -36,7 +22,7 @@ export default function HotelStayListPage () {
     const infoEdit=useRef();
     const statusEdit=useRef();
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getTargetId()});
+    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getHotel()?.id});
 
 
     const [form] = Form.useForm();

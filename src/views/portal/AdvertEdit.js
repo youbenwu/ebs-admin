@@ -1,6 +1,6 @@
 import React, {useState,useImperativeHandle,forwardRef,useEffect} from "react"
 import { Form, Input, notification,Button,Modal,Select,Space} from "antd";
-import {getOrgId, getOrgType} from "../../utils/StorageUtils";
+import {getOrg} from "../../utils/StorageUtils";
 import {getAdvertChannelPage, saveAdvert} from "../../api/AdvertAdminApi";
 import MyUpload from "../../components/MyUpload/MyUpload";
 import MyUploadFile from "../../components/MyUpload/MyUploadFile";
@@ -39,7 +39,7 @@ function AdvertEdit ({cref,onEditFinish}) {
     }));
 
     const loadChannelList=async ()=>{
-        let type=getOrgType()==0?'':1;
+        let type=getOrg().orgType==0?'':1;
         let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){
@@ -75,7 +75,7 @@ function AdvertEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        setOpen(true);
-       let orgId=data.orgId?data.orgId:getOrgId();
+       let orgId=data.orgId?data.orgId:getOrg().orgId;
        data.advertType=data.advertType?data.advertType:'CPM';
        setChannelId(data.channelId);
        //setImage(data.image)

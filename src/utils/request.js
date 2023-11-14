@@ -2,6 +2,7 @@ import axios from  'axios'
 import {baseUrl} from "../config/config";
 import { createBrowserHistory } from 'history'
 import {notification} from "antd";
+import {getOrg} from "./StorageUtils";
 const history = createBrowserHistory()
 
 
@@ -18,6 +19,11 @@ instance.interceptors.request.use(function (config) {
         let {id,session:{token}}=JSON.parse(userData);
         config.headers.userId=id;
         config.headers.token=token;
+    }
+    let org=getOrg();
+    if(org){
+        config.headers.orgId=org.orgId;
+        config.headers.sysId=org.sysId;
     }
     // 在发送请求之前做些什么
     return config;

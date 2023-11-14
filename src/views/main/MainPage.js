@@ -4,8 +4,8 @@ import {notification} from 'antd'
 import "./MainPage.scss"
 import { createFromIconfontCN ,MenuUnfoldOutlined,MenuFoldOutlined} from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import {$getMenuList} from "../../api/OrgApi";
-import {getSysId} from "../../utils/StorageUtils";
+import {getMenuList} from "../../api/MenuApi";
+
 
 
 const MyIcon = createFromIconfontCN({
@@ -43,7 +43,7 @@ export default function MainPage(){
     }
 
     const loadMenus = async () => {
-        let {status,message,data}=await $getMenuList({sysId:getSysId()});
+        let {status,message,data}=await getMenuList({});
         if(status==0){
             data=conver(data);
             console.log(data);

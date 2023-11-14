@@ -1,7 +1,6 @@
 import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
 import {saveRole} from "../../api/OrgAdminApi";
 import { Form, Input, notification, Space,Button,Modal} from "antd";
-import {getOrgId} from "../../utils/StorageUtils";
 
 function UserRegister ({cref,onRegisterFinish}) {
 

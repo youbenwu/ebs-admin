@@ -7,10 +7,12 @@ import {
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import {useState, useEffect, useRef} from "react"
-import {notification, Table, Space, Popconfirm, Form, Input,Button} from "antd";
-import {deleteMenu, getMenuList, saveMenu, sortMenu} from "../../../api/MenuAdminApi";
+import React, {useState, useEffect, useRef} from "react"
+import {notification, Table, Space, Button, Form, Input} from "antd";
+import {deleteMenu, getMenuList, sortMenu} from "../../../api/MenuAdminApi";
 import MyDeleteButton from "../../../components/buttons/MyDeleteButton";
+import MenuEdit from "./MenuEdit";
+import "./MenuListPage.scss"
 
 
 const Row = (props) => {
@@ -44,8 +46,6 @@ export default function MenuListPage () {
     const [data,setData]=useState([]);
     const dataEdit=useRef();
 
-    const [form] = Form.useForm();
-
     useEffect(()=>{
         loadData().then();
     },[]);
@@ -54,7 +54,7 @@ export default function MenuListPage () {
         setLoading(true);
         let {status,message,data}=await getMenuList({});
         setLoading(false);
-        console.log(data)
+        //console.log(data)
         if(status===0){
             setData(data);
         }else{
@@ -99,6 +99,13 @@ export default function MenuListPage () {
             key: 'id',
         },
         {
+            title: '图标',
+            key: 'icon',
+            render: (_, {icon}) => (
+                <img src={icon} style={{width:'25px',height:'25px'}}/>
+            ),
+        },
+        {
             title: '路径',
             dataIndex: 'path',
             key: 'path',
@@ -120,7 +127,7 @@ export default function MenuListPage () {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <Button size="small" type="primary" onClick={()=>{}}>编辑</Button>
+                    <Button size="small" type="primary" onClick={()=>{dataEdit.current.showModel(record)}}>编辑</Button>
                     <MyDeleteButton onConfirm={()=>onDelete(record)}/>
                 </Space>
             ),
@@ -140,8 +147,10 @@ export default function MenuListPage () {
             setData((prev) => {
                 const activeIndex = prev.findIndex((i) => i.id === active.id);
                 const overIndex = prev.findIndex((i) => i.id === over?.id);
-                prev= arrayMove(prev, activeIndex, overIndex);
-                onMove(prev).then();
+                if(activeIndex!==-1&&overIndex!==-1) {
+                    prev = arrayMove(prev, activeIndex, overIndex);
+                    onMove(prev).then();
+                }
                 return prev;
             });
         }
@@ -151,7 +160,9 @@ export default function MenuListPage () {
 
     return (
         <>
-
+            <div className="header">
+                <Button onClick={()=>{dataEdit.current.showModel({})}}>新增</Button>
+            </div>
             <DndContext sensors={sensors} modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
                 <SortableContext
                     // rowKey array
@@ -176,6 +187,7 @@ export default function MenuListPage () {
                     />
                 </SortableContext>
             </DndContext>
+            <MenuEdit cref={dataEdit} onEditFinish={(r)=>{if(r)loadData().then()}} list={data}/>
         </>
 
     );

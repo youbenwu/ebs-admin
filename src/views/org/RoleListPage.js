@@ -1,12 +1,11 @@
-import {useState,useEffect,useRef,useInsertionEffect} from "react"
+import {useState,useEffect,useRef} from "react"
 import {deleteRole, getRoleList} from "../../api/OrgAdminApi";
-import {getOrgId, saveUser} from "../../utils/StorageUtils";
-import {notification, Table, Space, Pagination, Popconfirm} from "antd";
+import {getOrg} from "../../utils/StorageUtils";
+import {notification, Table, Space, Popconfirm} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
 import RoleEdit from "./RoleEdit";
 import './RoleListPage.scss'
-import {deleteMessage} from "../../api/MessageAdminApi";
 import SelectPerList from "./SelectPerList";
 import SelectMenuList from "./SelectMenuList";
 
@@ -26,8 +25,7 @@ export default function RoleListPage () {
 
 
     const loadData=async ()=>{
-        let orgId=getOrgId();
-        let {status,message,data}=await getRoleList({orgId:orgId});
+        let {status,message,data}=await getRoleList({orgId:getOrg()?.orgId});
         console.log(data)
         if(status==0){
             setData(data);

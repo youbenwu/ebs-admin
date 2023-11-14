@@ -23,11 +23,16 @@ import HotelCustomerListPage from "./views/hotel/HotelCustomerListPage";
 import HotelWorkListPage from "./views/hotel/HotelWorkListPage";
 import HotelPage from "./views/hotel/HotelPage";
 import HotelStayListPage from "./views/hotel/HotelStayListPage";
-import ProductListPage from "./views/mall/product/ProductListPage";
+import ProductListPage from "./views/mall/product/list/ProductListPage";
 import DataStatsListPage from "./views/stats/DataStatsListPage";
 import ShopCategoryList from "./views/mall/shop/ShopCategoryList";
 import ShopList from "./views/mall/shop/ShopList";
 import MenuListPage from "./views/org/menu/MenuListPage";
+import SysListPage from "./views/sys/list/SysListPage";
+import ProductBsTypeListPage from "./views/mall/product/bstype/ProductBsTypeListPage";
+import ProductTypeListPage from "./views/mall/product/type/ProductTypeListPage";
+import ProductCategoryListPage from "./views/mall/product/category/ProductCategoryListPage";
+import ProductEditPage from "./views/mall/product/list/ProductEditPage";
 
 
 
@@ -42,7 +47,8 @@ function App() {
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/mall/order/list' element={<NoPage/>}/>
             <Route path='/mall/product/list' element={<ProductListPage/>}/>
-            <Route path='/mall/product/category/list' element={<NoPage/>}/>
+            <Route path='/mall/product/edit' element={<ProductEditPage/>}/>
+            <Route path='/mall/product/category/list' element={<ProductCategoryListPage/>}/>
             <Route path='/mall/shop/product/category/list' element={<ShopCategoryList/>}/>
             <Route path='/mall/shop/product/list' element={<ShopList/>}/>
             <Route path='/org/info' element={<OrgPage/>}/>
@@ -66,6 +72,9 @@ function App() {
             <Route path='/portal/data/stats/list' element={<DataStatsListPage/>}/>
         </Route>
         <Route path='/org/menus' element={<MenuListPage/>}/>
+        <Route path='/sys/list' element={<SysListPage/>}/>
+        <Route path='/mall/product/bstype/list' element={<ProductBsTypeListPage/>}/>
+        <Route path='/mall/product/type/list' element={<ProductTypeListPage/>}/>
       </Routes>
     </BrowserRouter>
   );

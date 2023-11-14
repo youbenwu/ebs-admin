@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useRef} from "react"
 
-import {getOrgId, getOrgType} from "../../utils/StorageUtils";
+import {getOrg} from "../../utils/StorageUtils";
 import {notification, Table, Space, Pagination, Popconfirm, Switch, Form, Input, Select} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
@@ -9,7 +9,6 @@ import {createBrowserHistory} from "history";
 import qs from "qs";
 import {deleteAdvert, getAdvertChannelPage, getAdvertPage, setAdvertStatus} from "../../api/AdvertAdminApi";
 import AdvertEdit from "./AdvertEdit";
-import {getChannelPage} from "../../api/ChannelAdminApi";
 
 
 export default function AdvertListPage () {
@@ -20,8 +19,7 @@ export default function AdvertListPage () {
     const advertEdit=useRef();
 
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',orgId:getOrgType()==0?'':getOrgId(),channelId:''});
-
+    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',orgId:getOrg().orgType==0?'':getOrg().orgId,channelId:''});
 
     const [form] = Form.useForm();
 
@@ -88,7 +86,7 @@ export default function AdvertListPage () {
     }
 
     const loadChannelList=async ()=>{
-        let type=getOrgType()==0?'':1;
+        let type=getOrg().orgType==0?'':1;
         let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){

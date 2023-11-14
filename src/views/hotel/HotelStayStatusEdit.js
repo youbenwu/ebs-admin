@@ -1,14 +1,6 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {saveRole} from "../../api/OrgAdminApi";
-import {Form, Input, notification, Space, Button, Modal, Select} from "antd";
-import {getOrgId} from "../../utils/StorageUtils";
-import MyUpload from "../../components/MyUpload/MyUpload";
-import {
-    registerHotel,
-    saveHotel,
-    setHotelRoomStatus,
-    setHotelStatus, setHotelStayStatus,
-    setHotelWorkOrderStatus
+import React, {useState,useImperativeHandle} from "react"
+import {Form, Input, notification, Button, Modal} from "antd";
+import { setHotelStayStatus,
 } from "../../api/HotelAdminApi";
 
 export default function HotelStayStatusEdit ({cref,onEditFinish}) {

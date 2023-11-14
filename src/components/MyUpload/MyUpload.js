@@ -21,14 +21,14 @@ const beforeUpload = (file) => {
 };
 
 
-export default function MyUpload ({onChange,image}) {
+export default function MyUpload ({onChange,image,id}) {
 
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
 
     useEffect(()=>{
         setImageUrl(image);
-    },[image])
+    },[image,id])
 
 
 

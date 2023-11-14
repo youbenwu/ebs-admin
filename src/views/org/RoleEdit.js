@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
 import {saveRole} from "../../api/OrgAdminApi";
 import { Form, Input, notification, Space,Button,Modal} from "antd";
-import {getOrgId} from "../../utils/StorageUtils";
+import {getOrg} from "../../utils/StorageUtils";
 
 export default function RoleEdit ({cref,onEditFinish}) {
 
@@ -18,10 +18,9 @@ export default function RoleEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        setOpen(true);
-       let orgId=data.orgId?data.orgId:getOrgId();
        form.setFieldsValue({
            'id':data.id,
-           'orgId':orgId,
+           'orgId':data.orgId??getOrg()?.orgId,
            'name':data.name,
            'title':data.title,
            'description':data.description,

@@ -3,7 +3,7 @@ import './LoginPage.scss'
 import { Button, Checkbox, Form, Input,notification,Space } from 'antd';
 import {useNavigate} from 'react-router-dom'
 import {$login} from "../../api/UserApi";
-import {saveSys, saveUser} from "../../utils/StorageUtils";
+import {saveOrg, saveUser} from "../../utils/StorageUtils";
 import SelectSys from "./SelectSys";
 
 export default function LoginPage(){
@@ -22,7 +22,7 @@ export default function LoginPage(){
             //保存登陆后的用户信息
             saveUser(data);
             if(data.orgs.length==1){
-                saveSys(data.orgs[0]);
+                saveOrg(data.orgs[0]);
                 notification.info({message:"系统提示",description:message});
                 navigate('/home');
             }else{

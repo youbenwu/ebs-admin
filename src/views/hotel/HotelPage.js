@@ -1,11 +1,9 @@
 import {useState, useEffect, useRef} from "react"
-import {$getOrg} from "../../api/OrgAdminApi";
-import {getOrgId, getTargetId, saveUser} from "../../utils/StorageUtils";
-import {notification,Space} from "antd";
+import {notification,Space} from "antd"
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
-import {getHotel} from "../../api/HotelAdminApi";
-import HotelEdit from "./HotelEdit";
+import {getHotel} from "../../api/HotelAdminApi"
+import HotelEdit from "./HotelEdit"
 import './HotelPage.scss'
 
 export default function HotelPage () {
@@ -20,7 +18,7 @@ export default function HotelPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let {status,message,data}=await getHotel({id:getTargetId()});
+        let {status,message,data}=await getHotel({id:getHotel().id});
         if(status==0){
             setData(data);
         }else{

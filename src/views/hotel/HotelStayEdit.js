@@ -1,19 +1,10 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {getRoleMenuList, saveRole} from "../../api/OrgAdminApi";
+import React, {useState,useEffect,useImperativeHandle} from "react"
 import { Form, Input, notification, Space,Button,Modal,Select,DatePicker} from "antd";
-import {getOrgId, getTargetId} from "../../utils/StorageUtils";
-import MyUpload from "../../components/MyUpload/MyUpload";
-import moment from 'moment'
+import {getHotel} from "../../utils/StorageUtils";
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {
-    getHotelCumstomer, getHotelCumstomerByPhone,
-    getHotelRoomByRoomNo, getHotelRoomPage,
-    getHotelRoomTypePage, getHotelStayPage,
-    registerHotel,
-    saveHotel,
-    saveHotelRoom, saveHotelStay,
-    saveHotelWorkOrder
+     getHotelCumstomerByPhone,
+   getHotelRoomPage,saveHotelStay,
 } from "../../api/HotelAdminApi";
 
 const { RangePicker } = DatePicker;
@@ -40,7 +31,7 @@ export default function HotelStayEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getTargetId();
+           data.hotelId=getHotel()?.id;
        }
        setOpen(true);
 

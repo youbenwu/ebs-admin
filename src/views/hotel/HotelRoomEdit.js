@@ -1,9 +1,8 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {getRoleMenuList, saveRole} from "../../api/OrgAdminApi";
+import React, {useState,useImperativeHandle} from "react"
 import { Form, Input, notification, Space,Button,Modal,Select} from "antd";
-import {getOrgId, getTargetId} from "../../utils/StorageUtils";
+import { getHotel} from "../../utils/StorageUtils";
 import MyUpload from "../../components/MyUpload/MyUpload";
-import {getHotelRoomTypePage, registerHotel, saveHotel, saveHotelRoom} from "../../api/HotelAdminApi";
+import {getHotelRoomTypePage, saveHotelRoom} from "../../api/HotelAdminApi";
 
 export default function HotelRoomEdit ({cref,onEditFinish}) {
 
@@ -25,7 +24,7 @@ export default function HotelRoomEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getTargetId();
+           data.hotelId=getHotel()?.id;
        }
        setOpen(true);
        form.setFieldsValue({

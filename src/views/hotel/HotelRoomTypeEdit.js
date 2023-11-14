@@ -1,7 +1,7 @@
-import React, {useState,useEffect,useImperativeHandle} from "react"
+import React, {useState,useImperativeHandle} from "react"
 import { Form, Input, notification, Space,Button,Modal,Select} from "antd";
-import {saveHotelDevice, saveHotelRoomType} from "../../api/HotelAdminApi";
-import {getTargetId} from "../../utils/StorageUtils";
+import {saveHotelRoomType} from "../../api/HotelAdminApi";
+import {getHotel} from "../../utils/StorageUtils";
 
 export default function HotelRoomTypeEdit ({cref,onEditFinish}) {
 
@@ -19,7 +19,7 @@ export default function HotelRoomTypeEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getTargetId();
+           data.hotelId=getHotel().id;
        }
        setOpen(true);
        setData(data);

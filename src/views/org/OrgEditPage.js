@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react"
 import {$getOrg, $saveOrg} from "../../api/OrgAdminApi";
 import {Checkbox, Form, Input, notification, Space} from "antd";
 import {Button} from 'antd'
-import {getOrgId, saveUser} from "../../utils/StorageUtils";
+import {getOrg} from "../../utils/StorageUtils";
 import {useNavigate} from 'react-router-dom'
 import {$login} from "../../api/UserApi";
 
@@ -17,7 +17,7 @@ export default function OrgEditPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let orgId=getOrgId();
+        let orgId=getOrg().orgId;
         let {status,message,data}=await $getOrg({id:orgId});
         if(status==0){
             setData(data);

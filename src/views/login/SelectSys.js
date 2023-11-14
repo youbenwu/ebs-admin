@@ -1,6 +1,6 @@
 import React, {useState,useImperativeHandle} from "react"
 import { Space,Button,Modal,Radio,Select ,notification} from "antd";
-import {saveSys , saveHotel} from "../../utils/StorageUtils";
+import {saveOrg , saveHotel} from "../../utils/StorageUtils";
 import {getHotel} from "../../api/HotelAdminApi";
 
 export default function SelectSys ({cref,onOk}) {
@@ -35,7 +35,7 @@ export default function SelectSys ({cref,onOk}) {
                 }
             })
             console.log(v);
-            saveSys(v);
+            saveOrg(v);
             onOk(true);
             if(v.type==6) {
                 loadData(v.targetId)

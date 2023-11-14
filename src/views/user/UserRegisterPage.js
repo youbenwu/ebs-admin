@@ -1,7 +1,6 @@
-import React, {useState,useEffect,useImperativeHandle,forwardRef} from "react"
-import {saveRole} from "../../api/OrgAdminApi";
+import React, {} from "react"
 import {Form, Input, notification, Space, Button, Modal, Checkbox} from "antd";
-import {getOrgId, saveUser} from "../../utils/StorageUtils";
+import { saveUser} from "../../utils/StorageUtils";
 import {$login} from "../../api/UserApi";
 
 export default function UserRegisterPage () {

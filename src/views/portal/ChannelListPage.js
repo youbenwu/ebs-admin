@@ -1,6 +1,5 @@
 import {useState,useEffect,useRef} from "react"
 
-import {getOrgId} from "../../utils/StorageUtils";
 import {notification, Table, Space, Pagination, Popconfirm} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
@@ -39,8 +38,7 @@ export default function ChannelListPage () {
 
 
     const loadData=async ({page,size})=>{
-        let orgId=getOrgId();
-        let {status,message,data}=await getAdvertChannelPage({orgId:orgId,page:page,size:size});
+        let {status,message,data}=await getAdvertChannelPage({page:page,size:size});
         console.log(data)
         if(status==0){
             setData(data);
