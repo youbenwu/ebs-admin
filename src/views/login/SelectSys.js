@@ -34,10 +34,11 @@ export default function SelectSys ({cref,onOk}) {
                     v=t;
                 }
             })
-            console.log(v);
             saveOrg(v);
             onOk(true);
-            if(v.type==6) {
+            console.log("=======");
+            console.log(v);
+            if(v.orgType==6) {
                 loadData(v.targetId)
             }
             setOpen(false);

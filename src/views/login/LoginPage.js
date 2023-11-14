@@ -3,8 +3,9 @@ import './LoginPage.scss'
 import { Button, Checkbox, Form, Input,notification,Space } from 'antd';
 import {useNavigate} from 'react-router-dom'
 import {$login} from "../../api/UserApi";
-import {saveOrg, saveUser} from "../../utils/StorageUtils";
+import {saveHotel, saveOrg, saveUser} from "../../utils/StorageUtils";
 import SelectSys from "./SelectSys";
+import {getHotel} from "../../api/HotelAdminApi";
 
 export default function LoginPage(){
     const navigate=useNavigate();
@@ -23,6 +24,9 @@ export default function LoginPage(){
             saveUser(data);
             if(data.orgs.length==1){
                 saveOrg(data.orgs[0]);
+                if(data.orgs[0].orgType==6) {
+                    loadData(data.orgs[0].targetId)
+                }
                 notification.info({message:"系统提示",description:message});
                 navigate('/home');
             }else{
@@ -32,6 +36,16 @@ export default function LoginPage(){
             notification.error({message:"系统提示",description:message});
         }
     };
+
+    const loadData=async (id)=>{
+        let {status,message,data}=await getHotel({id});
+        if(status==0){
+            saveHotel(data)
+        }else{
+            notification.error({message:"系统提示",description:message});
+        }
+    }
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
