@@ -47,12 +47,13 @@ export default function HotelListPage () {
     },[request]);
 
 
+    //0--正常 1--禁用 2--未审核 3--审核中 4--审核失败
     const statusMap={
         0:"正常",
         1:"禁用",
         2:"未审核",
-        5:"审核失败",
-        7:"欠费",
+        3:"审核中",
+        4:"审核失败",
     };
 
 

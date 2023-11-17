@@ -59,7 +59,7 @@ function HotelStatusEdit ({cref,onEditFinish}) {
     };
 
 
-
+    ////0--正常 1--禁用 2--未审核 3--审核中 4--审核失败
     const options = [
         {
             value:0,
@@ -74,12 +74,12 @@ function HotelStatusEdit ({cref,onEditFinish}) {
             label:'未审核',
         },
         {
-            value:5,
-            label:'审核失败',
+            value:3,
+            label:'审核中',
         },
         {
-            value:7,
-            label:'欠费',
+            value:4,
+            label:'审核失败',
         },
     ];
 
