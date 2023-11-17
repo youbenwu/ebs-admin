@@ -98,12 +98,12 @@ export default function HotelListPage () {
             label:'未审核',
         },
         {
-            key:'5',
-            label:'审核失败',
+            key:'3',
+            label:'审核中',
         },
         {
-            key:'7',
-            label:'欠费',
+            key:'4',
+            label:'审核失败',
         },
     ];
 

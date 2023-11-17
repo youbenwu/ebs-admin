@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39759eed-de6a-4830-a364-50d1ecfa3045" name="Default Changelist" comment="e">
+    <list default="true" id="39759eed-de6a-4830-a364-50d1ecfa3045" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelListPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelListPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelListPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="49" column="39" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="39" />
+            <state relative-caret-position="-881">
+              <caret line="95" column="9" lean-forward="true" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -75,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="168" column="23" lean-forward="true" selection-start-line="168" selection-start-column="23" selection-end-line="168" selection-end-column="23" />
+            <state relative-caret-position="215">
+              <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -235,8 +233,8 @@
         <option value="$PROJECT_DIR$/src/views/login/LoginPage.js" />
         <option value="$PROJECT_DIR$/src/views/hotel/HotelPage.js" />
         <option value="$PROJECT_DIR$/src/config/config.js" />
-        <option value="$PROJECT_DIR$/src/views/hotel/HotelListPage.js" />
         <option value="$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js" />
+        <option value="$PROJECT_DIR$/src/views/hotel/HotelListPage.js" />
       </list>
     </option>
   </component>
@@ -395,7 +393,7 @@
       <workItem from="1698817299294" duration="19407000" />
       <workItem from="1698938910147" duration="59574000" />
       <workItem from="1699234966990" duration="47267000" />
-      <workItem from="1700036519581" duration="6102000" />
+      <workItem from="1700036519581" duration="6794000" />
     </task>
     <task id="LOCAL-00001" summary="e">
       <created>1697008807079</created>
@@ -502,11 +500,18 @@
       <option name="project" value="LOCAL" />
       <updated>1699945093665</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="e">
+      <created>1700219679250</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1700219679250</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="366922000" />
+    <option name="totallyTimeSpent" value="367614000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -519,9 +524,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1431" height="824" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30597553" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30597553" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -532,7 +536,7 @@
       <window_info id="npm" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.3181818" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.3181818" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3989432" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -980,16 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelListPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="49" column="39" lean-forward="true" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelEdit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1001,10 +995,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelStatusEdit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="168" column="23" lean-forward="true" selection-start-line="168" selection-start-column="23" selection-end-line="168" selection-end-column="23" />
+        <state relative-caret-position="215">
+          <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/hotel/HotelListPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-881">
+          <caret line="95" column="9" lean-forward="true" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
