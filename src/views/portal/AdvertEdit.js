@@ -86,6 +86,7 @@ function AdvertEdit ({cref,onEditFinish}) {
        form.setFieldsValue({
            'id':data.id,
            'orgId':orgId,
+           'status':data.status??1,
            'channelId':data.channelId,
            'advertType':data.advertType,
            'title':data.title,
