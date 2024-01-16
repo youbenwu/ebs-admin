@@ -6,7 +6,7 @@ import './MsgListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
 import {deleteMessage, getMessagePage} from "../../api/MessageAdminApi";
-import {getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg} from "../../utils/StorageUtils";
 
 
 export default function MsgListPage () {
@@ -15,7 +15,7 @@ export default function MsgListPage () {
     const navigate=useNavigate();
     const [data,setData]=useState([]);
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,keyword:'',orgId:getOrg().orgType==0?"":getOrg().orgId});
+    const [request,setRequest]=useState({page:0,size:10,keyword:'',orgId:getLocalOrg().type==0?"":getLocalOrg().id});
 
 
     const [form] = Form.useForm();

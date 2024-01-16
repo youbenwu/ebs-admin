@@ -3,7 +3,7 @@ import {
     getMenuListBySys, getRoleMenuList, setRoleMenuList
 } from "../../api/OrgAdminApi";
 import { notification,Button,Modal,Cascader} from "antd";
-import { getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg, getLocalSys} from "../../utils/StorageUtils";
 
 
 const { SHOW_CHILD } = Cascader;
@@ -40,7 +40,7 @@ export default function SelectMenuList ({cref,onEditFinish}) {
 
 
    const loadData= async ()=>{
-       let {status,message,data}=await getMenuListBySys({sysId:getOrg().sysId});
+       let {status,message,data}=await getMenuListBySys({sysId:getLocalSys().id});
 
        if(status==0){
            data=coverData(data);

@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from "react"
 import { deleteAccount, getAccountPage} from "../../api/OrgAdminApi";
-import {getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg} from "../../utils/StorageUtils";
 import {notification, Table, Space, Pagination, Popconfirm, Form, Input} from "antd";
 import {Button} from 'antd'
 import {useNavigate,useLocation} from 'react-router-dom'
@@ -47,7 +47,7 @@ export default function AccountListPage () {
     },[request]);
 
     const loadData=async ()=>{
-        let orgId=getOrg().orgId;
+        let orgId=getLocalOrg().id;
         let {status,message,data}=await getAccountPage({...request,orgId:orgId});
         console.log(data)
         if(status==0){

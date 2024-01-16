@@ -1,25 +1,50 @@
 import React, {useState,useEffect} from "react"
-import {Form, Input, notification, Space,Cascader} from "antd";
+import {Form, Input, notification, Space,Cascader,Radio} from "antd";
 import {Button} from 'antd'
 import {useNavigate,useLocation} from 'react-router-dom'
-import {getProductCategoryList} from "../../../../api/ProductCategoryAdminApi";
+import {getProductCategoryList} from "../../../../api/ProductCategoryApi";
 import {getProduct, saveProduct} from "../../../../api/ProductAdminApi";
 import MyUpload from "../../../../components/MyUpload/MyUploadList";
+import ProductPropertiesEditView from "./ProductPropertiesEditView";
+import ProductSkusEditView from "./ProductSkusEditView";
+import {tree_findNodeById, tree_findPathById} from "../../../../utils/tree";
+import {generateCombinations} from "../../../../utils/sku";
+import {getLocalMerchant} from "../../../../utils/StorageUtils";
+import {getSpCategoryList} from "../../../../api/ShopAdminApi";
+
 
 export default function ProductEditPage () {
 
     const navigate=useNavigate();
     const location = useLocation();
 
+    const [loading, setLoading] = useState(false);
     const [categorys,setCategorys]=useState([]);
+    const [spcs,setSpcs]=useState([]);
     const [data,setData]=useState({});
+    const [images,setImages]=useState([]);
+    const [properties,setProperties]=useState([]);
+    const [skus,setSkus]=useState([]);
+    const [medias,setMedias]=useState([]);
 
     useEffect(()=>{
         //加载商品详情
         const loadData=async (id)=>{
             let {status,data}=await getProduct({id:id});
             if(status==0){
-               setData(data)
+                data.properties.forEach(p=>{
+                    if(!p.items){
+                        p.items=p.value?JSON.parse(p.value):[];
+                    }
+                    p.items?.forEach(t=>{
+                        t.selected=true;
+                    })
+                })
+                setData(data);
+                setImages(data.images??[]);
+                setProperties(data.properties??[]);
+                setSkus(data.skus??[]);
+                setMedias(data.medias??[]);
             }
         }
         let id=location.state?.id;
@@ -51,29 +76,123 @@ export default function ProductEditPage () {
         loadCategoryList().then();
     },[]);
 
+    useEffect(()=>{
+        //加载分类数据
+        const loadSpCategoryList=async ()=>{
+            let {status,data}=await getSpCategoryList({shopId:getLocalMerchant()?.shopId});
+            if(status==0){
+                data=toOptions(data)
+                setSpcs(data);
+            }
+        }
+        const toOptions=(data)=>{
+            data=data.map(t=>{
+                return {
+                    ...t,
+                    value:t.id,
+                    label:t.title,
+                    children:t.children?toOptions(t.children):null,
+                }
+            })
+            return data;
+        }
+        loadSpCategoryList().then();
+    },[]);
+
+
+    useEffect(()=>{
+        let path=(categorys&&data.categoryId)?tree_findPathById(categorys,data.categoryId):null;
+        let path2=(spcs&&data.spcId)?tree_findPathById(spcs,data.spcId):null;
+        form.setFieldsValue({
+            'id':data.id,
+            'shopId':data.shopId??getLocalMerchant()?.shopId,
+            'spcId':path2?.map(t=>t.id),
+            'categoryId':path?.map(t=>t.id),
+            'title':data.title,
+            'subtitle':data.subtitle,
+            'onSell':data.onSell??true,
+            'distribution':data.distribution??false,
+            'commissionType':data.commissionType,
+            'commissionRate':data.commissionRate,
+            'commissionAmount':data.commissionAmount,
+        });
+    },[data]);
 
     useEffect(()=>{
         form.setFieldsValue({
-            'id':data.id,
-            'title':data.title,
-            'subtitle':data.subtitle,
-            'images':data.images,
+            'images':images,
         });
-    },[data]);
+    },[images]);
+
+    useEffect(()=>{
+        let ps=properties.map(p=>{
+            return {
+                ...p,
+                items:p.items?.filter(i=>i.selected===true),
+            };
+        })
+        //console.log('properties:', ps);
+        form.setFieldsValue({
+            'properties':ps,
+
+        });
+    },[properties]);
+
+    useEffect(()=>{
+        form.setFieldsValue({
+            'skus':skus,
+        });
+    },[skus]);
+
+    useEffect(()=>{
+        form.setFieldsValue({
+            'medias':medias,
+        });
+    },[medias]);
+
+
+    const generateSkus=(properties)=>{
+        let newSkus=generateCombinations(properties).filter(t=>t.enable);
+        let skuMap=new Map();
+        data.skus?.forEach(sku=>{
+            skuMap.set(sku.name,sku);
+        })
+        newSkus=newSkus.map(sku=>{
+            let s=skuMap.get(sku.name);
+            if(s) {
+                return {
+                    ...s,
+                    value: sku.value,
+                    items: sku.items,
+                }
+            }
+            return sku;
+        })
+        //console.log(newSkus);
+        setSkus(newSkus)
+    }
+
 
 
     const [form] = Form.useForm();
 
     const onFinish =async (values) => {
+        let categoryId=values.categoryId[values.categoryId.length-1];
+        let category=tree_findNodeById(categorys,categoryId);
+        let spcId=values.spcId[values.spcId.length-1];
         let request={
             ...values,
-            categoryId:values.categoryId[values.categoryId.length-1]
+            categoryId:categoryId,
+            spcId:spcId,
+            type:category.productType,
         }
         console.log('request:', request);
+        setLoading(true)
         let {status,message}=await saveProduct(request);
+        setLoading(false)
         if(status==0){
             notification.info({message:"系统提示",description:message});
-            navigate("/mall/product/list");
+            navigate(location.state?.from??"/mall/product/list");
         }else{
             notification.error({message:"系统提示",description:message});
         }
@@ -95,7 +214,7 @@ export default function ProductEditPage () {
                     span: 18,
                 }}
                 style={{
-                    maxWidth: 600,
+                    maxWidth: 800,
                 }}
                 initialValues={{
                     remember: true,
@@ -118,6 +237,18 @@ export default function ProductEditPage () {
                     <Cascader options={categorys} placeholder="请选择商品类别" />
                 </Form.Item>
 
+                <Form.Item
+                    label="店铺分类"
+                    name="spcId"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请选择店铺分类!',
+                        },
+                    ]}
+                >
+                    <Cascader options={spcs} placeholder="请选择店铺分类" />
+                </Form.Item>
 
                 <Form.Item
                     label="商品ID"
@@ -126,6 +257,18 @@ export default function ProductEditPage () {
                     rules={[
                         {
                             required: false,
+                        },
+                    ]}
+                >
+                </Form.Item>
+
+                <Form.Item
+                    label="shopId"
+                    name="shopId"
+                    hidden={true}
+                    rules={[
+                        {
+                            required: true,
                         },
                     ]}
                 >
@@ -163,21 +306,87 @@ export default function ProductEditPage () {
                     name="images"
                     rules={[
                         {
-                            required: false,
+                            required: true,
                             message: '请上传商品图片!',
                         },
                     ]}
                 >
-                    <MyUpload images={data.images??[]} onChange={(v)=>{
-                        form.setFieldsValue({
-                            'images':v,
-                        });
+                    <MyUpload images={images} onChange={(v)=>{
+                        setImages(v);
+                    }}/>
+                </Form.Item>
+
+                <Form.Item
+                    label="商品规格"
+                    name="properties"
+                    rules={[
+                        {
+                            required: false,
+                            message: '请设置商品规格!',
+                        },
+                    ]}
+                >
+                    <ProductPropertiesEditView
+                        properties={properties}
+                        onChange={(ps)=>{
+                            //console.log(ps)
+                            setProperties([...ps])
+                            generateSkus(ps)
+                        }}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    label="商品SKU"
+                    name="skus"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请设置商品SKU!',
+                        },
+                    ]}
+                >
+                    <ProductSkusEditView
+                        skus={skus}
+                        add={!data.properties||data.properties.length===0}
+                        onChange={(skus)=>{
+                            setSkus(skus);
+                        }}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    label="商品详情图片"
+                    name="medias"
+                    rules={[
+                        {
+                            required: false,
+                            message: '请上传商品详情图片!',
+                        },
+                    ]}
+                >
+                    <MyUpload images={medias} onChange={(v)=>{
+                        setMedias(v);
                     }}/>
                 </Form.Item>
 
 
 
-
+                <Form.Item
+                    label="是否上架"
+                    name="onSell"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请选择是否上架!',
+                        },
+                    ]}
+                >
+                    <Radio.Group defaultValue={true}>
+                        <Radio value={true}>是</Radio>
+                        <Radio value={false}>否</Radio>
+                    </Radio.Group>
+                </Form.Item>
 
                 <Form.Item
                     wrapperCol={{
@@ -186,11 +395,11 @@ export default function ProductEditPage () {
                     }}
                 >
                     <Space>
-                        <Button  type="primary" htmlType="submit">
+                        <Button  type="primary" htmlType="submit" loading={loading}>
                             确定
                         </Button>
                         <Button  htmlType="button" onClick={()=>{
-                            navigate("/mall/product/list");
+                            navigate(location.state?.from??"/mall/product/list");
                         }}>
                             取消
                         </Button>

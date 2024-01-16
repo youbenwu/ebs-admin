@@ -44,6 +44,13 @@ export const deleteProduct=async (params)=>{
     return data;
 }
 
+// /api/admin/mall/product/setOnSell
+// 设置商品上下架
+export const $setProductOnSell=async (params)=>{
+    let {data}=await axios.postForm('/api/admin/mall/product/setOnSell',params);
+    return data;
+}
+
 // /api/admin/mall/product/get
 // 获取商品信息
 export const getProduct=async (params)=>{

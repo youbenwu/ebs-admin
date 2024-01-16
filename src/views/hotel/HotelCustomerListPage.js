@@ -8,7 +8,7 @@ import qs from "qs";
 import {
     deleteHotelCustomer,getHotelCustomerPage,
 } from "../../api/HotelAdminApi";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import HotelCustomerEdit from "./HotelCustomerEdit";
 
 
@@ -19,7 +19,7 @@ export default function HotelCustomerListPage () {
     const [data,setData]=useState([]);
     const infoEdit=useRef();
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,stayStatus:'',keyword:'',hotelId:getHotel()?.id});
+    const [request,setRequest]=useState({page:0,size:10,stayStatus:'',keyword:'',hotelId:getLocalHotel()?.id});
 
 
     const [form] = Form.useForm();

@@ -54,3 +54,14 @@ export const setAdvertStatus=async (params)=>{
     let {data}=await axios.postForm('/api/admin/portal/advert/setStatus',params);
     return data;
 }
+
+
+export const setAdvertDisplay=async (params)=>{
+    let {data}=await axios.postForm('/api/admin/portal/advert/display',params);
+    return data;
+}
+
+export const getStatsAdvertStatus=async (params)=>{
+    let {data}=await axios.postForm('/api/admin/portal/advert/stats/status',params);
+    return data;
+}

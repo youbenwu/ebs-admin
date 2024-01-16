@@ -1,11 +1,14 @@
 import React, {useState,useImperativeHandle,forwardRef,useEffect} from "react"
-import { Form, Input, notification,Button,Modal,Select,Space} from "antd";
-import {getOrg} from "../../utils/StorageUtils";
+import { DatePicker,Form, Input, notification,Button,Modal,Select,Space} from "antd";
+import {getLocalOrg} from "../../utils/StorageUtils";
 import {getAdvertChannelPage, saveAdvert} from "../../api/AdvertAdminApi";
 import MyUpload from "../../components/MyUpload/MyUpload";
 import MyUploadFile from "../../components/MyUpload/MyUploadFile";
 import MyUploadList from "../../components/MyUpload/MyUploadList";
+import dayjs from 'dayjs';
+const { RangePicker } = DatePicker;
 
+const dateFormat = 'YYYY-MM-DD';
 
 function AdvertEdit ({cref,onEditFinish}) {
 
@@ -39,7 +42,7 @@ function AdvertEdit ({cref,onEditFinish}) {
     }));
 
     const loadChannelList=async ()=>{
-        let type=getOrg().orgType==0?'':1;
+        let type=getLocalOrg().type==0?'':1;
         let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){
@@ -75,7 +78,7 @@ function AdvertEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        setOpen(true);
-       let orgId=data.orgId?data.orgId:getOrg().orgId;
+       let orgId=data.orgId?data.orgId:getLocalOrg().id;
        data.advertType=data.advertType?data.advertType:'CPM';
        setChannelId(data.channelId);
        //setImage(data.image)
@@ -83,10 +86,15 @@ function AdvertEdit ({cref,onEditFinish}) {
        setQrCode(data.qrCode)
        setVideo(data.video)
        setAdvertType(data.advertType)
+
+
        form.setFieldsValue({
            'id':data.id,
+           'type':data.type??0,
            'orgId':orgId,
-           'status':data.status??1,
+           'display':data.display??false,
+           'status':data.status??0,
+           'citys':data.citys,
            'channelId':data.channelId,
            'advertType':data.advertType,
            'title':data.title,
@@ -94,8 +102,7 @@ function AdvertEdit ({cref,onEditFinish}) {
            //'image':data.image,
            'images':data.images?data.images:data.image,
            'url':data.url,
-           'startTime':data.startTime,
-           'endTime':data.endTime,
+           'times':data.startTime?[dayjs(data.startTime, dateFormat),dayjs(data.endTime, dateFormat)]:[],
        });
    }
 
@@ -105,7 +112,11 @@ function AdvertEdit ({cref,onEditFinish}) {
     const onFinish =async (values) => {
         console.log(values);
         setLoading(true);
-        let {status,message}=await saveAdvert(values);
+        let {status,message}=await saveAdvert({
+            ...values,
+            startTime:values.times[0]?.format(dateFormat),
+            endTime:values.times[1]?.format(dateFormat),
+        });
         setLoading(false);
         if(status==0){
             notification.info({message:"系统提示",description:message});
@@ -201,6 +212,54 @@ function AdvertEdit ({cref,onEditFinish}) {
                     </Form.Item>
 
                     <Form.Item
+                        label="type"
+                        name="type"
+                        hidden={true}
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                    </Form.Item>
+
+                    <Form.Item
+                        label="status"
+                        name="status"
+                        hidden={true}
+                        rules={[
+                            {
+                                required: false,
+                            },
+                        ]}
+                    >
+                    </Form.Item>
+
+                    <Form.Item
+                        label="display"
+                        name="display"
+                        hidden={true}
+                        rules={[
+                            {
+                                required: false,
+                            },
+                        ]}
+                    >
+                    </Form.Item>
+
+                    <Form.Item
+                        label="citys"
+                        name="citys"
+                        hidden={true}
+                        rules={[
+                            {
+                                required: false,
+                            },
+                        ]}
+                    >
+                    </Form.Item>
+
+                    <Form.Item
                         label="orgId"
                         name="orgId"
                         hidden={true}
@@ -217,7 +276,7 @@ function AdvertEdit ({cref,onEditFinish}) {
                         name="channelId"
                         rules={[
                             {
-                                required: false,
+                                required: true,
                                 message: '请选择频道!',
                             },
                         ]}
@@ -242,7 +301,7 @@ function AdvertEdit ({cref,onEditFinish}) {
                         name="advertType"
                         rules={[
                             {
-                                required: true,
+                                required: false,
                                 message: '请选择广告类型!',
                             },
                         ]}
@@ -284,34 +343,6 @@ function AdvertEdit ({cref,onEditFinish}) {
                         <Input.TextArea placeholder="请输入广告副标题!" />
                     </Form.Item>
 
-
-                    {/*<Form.Item*/}
-                    {/*    label="广告图片"*/}
-                    {/*    name="image"*/}
-
-                    {/*    rules={[*/}
-                    {/*        {*/}
-                    {/*            required: true,*/}
-                    {/*            message: '请输入链接或上传广告图片!',*/}
-                    {/*        },*/}
-                    {/*    ]}*/}
-                    {/*>*/}
-                    {/*    <Space direction="vertical" style={{width:'100%'}}>*/}
-                    {/*        <Input.TextArea value={image} placeholder="请输入链接或上传广告图片!"  onChange={(e)=>{*/}
-                    {/*            setImage(e.target.value)*/}
-                    {/*            form.setFieldsValue({*/}
-                    {/*                'image':e.target.value*/}
-                    {/*            });*/}
-                    {/*        }}/>*/}
-                    {/*        <MyUpload image={image} onChange={(url)=>{*/}
-                    {/*            setImage(url)*/}
-                    {/*            form.setFieldsValue({*/}
-                    {/*                'image':url*/}
-                    {/*            });*/}
-                    {/*        }} />*/}
-                    {/*    </Space>*/}
-
-                    {/*</Form.Item>*/}
 
 
                     <Form.Item
@@ -366,32 +397,28 @@ function AdvertEdit ({cref,onEditFinish}) {
                     </Form.Item>
 
 
-                    {
-                        advertType=="CPC"?(<Form.Item
+                    <Form.Item
                                 label="广告URL"
                                 name="url"
+                                hidden={advertType=="CPC"}
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                         message: '请输入广告URL!',
                                     },
                                 ]}
                             >
                                 <Input.TextArea placeholder="请输入广告URL!"/>
-                            </Form.Item>
-                        ):(<></>)
-                    }
+                    </Form.Item>
 
 
-
-                    {
-                        advertType=="CPA"?(<Form.Item
+                    <Form.Item
                             label="广告二维码"
                             name="qrCode"
-
+                            hidden={advertType=="CPA"}
                             rules={[
                                 {
-                                    required: true,
+                                    required: false,
                                     message: '请输入链接或上传广告二维码!',
                                 },
                             ]}
@@ -411,9 +438,21 @@ function AdvertEdit ({cref,onEditFinish}) {
                                 }} />
                             </Space>
 
-                        </Form.Item>):(<></>)
-                    }
+                   </Form.Item>
 
+
+                    <Form.Item
+                        label="显示时间"
+                        name="times"
+                        rules={[
+                            {
+                                required: false,
+                                message: '请选择显示开始结束时间!',
+                            },
+                        ]}
+                    >
+                        <RangePicker />
+                    </Form.Item>
 
 
                 </Form>

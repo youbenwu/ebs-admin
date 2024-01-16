@@ -1,6 +1,6 @@
 import React, {useState,useImperativeHandle} from "react"
 import { Form, Input, notification,Button,Modal} from "antd";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import {
     saveHotelCumstomer,
 } from "../../api/HotelAdminApi";
@@ -22,7 +22,7 @@ export default function HotelCustomerEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getHotel()?.id;
+           data.hotelId=getLocalHotel()?.id;
        }
        setOpen(true);
        form.setFieldsValue({

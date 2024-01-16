@@ -9,7 +9,7 @@ import qs from "qs";
 import {
     deleteHotelStay, getHotelStayPage
 } from "../../api/HotelAdminApi";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import HotelStayEdit from "./HotelStayEdit";
 import HotelStayStatusEdit from "./HotelStayStatusEdit";
 
@@ -22,7 +22,7 @@ export default function HotelStayListPage () {
     const infoEdit=useRef();
     const statusEdit=useRef();
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getHotel()?.id});
+    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',hotelId:getLocalHotel()?.id});
 
 
     const [form] = Form.useForm();

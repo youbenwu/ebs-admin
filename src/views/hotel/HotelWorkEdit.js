@@ -1,6 +1,6 @@
 import React, {useState,useEffect,useImperativeHandle} from "react"
 import { Form, Input, notification, Space,Button,Modal,Select,DatePicker} from "antd";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import dayjs from 'dayjs';
 import {
     saveHotelWorkOrder
@@ -26,7 +26,7 @@ export default function HotelWorkEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getHotel()?.id;
+           data.hotelId=getLocalHotel()?.id;
        }
        setOpen(true);
 

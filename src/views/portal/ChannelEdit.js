@@ -1,6 +1,6 @@
 import React, {useState,useImperativeHandle,forwardRef} from "react"
 import { Form, Input, notification,Button,Modal} from "antd";
-import {getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg} from "../../utils/StorageUtils";
 import {saveAdvertChannel} from "../../api/AdvertAdminApi";
 
 function ChannelEdit ({cref,onEditFinish}) {
@@ -18,7 +18,7 @@ function ChannelEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        setOpen(true);
-       let orgId=data.orgId?data.orgId:getOrg().orgId;
+       let orgId=data.orgId?data.orgId:getLocalOrg().id;
        form.setFieldsValue({
            'id':data.id,
            'orgId':orgId,

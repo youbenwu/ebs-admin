@@ -6,6 +6,7 @@ import './UserListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
 import {getUserPage} from "../../api/UserAdminApi";
+import {baseUrl} from "../../config/config";
 
 
 export default function UserListPage () {
@@ -35,7 +36,7 @@ export default function UserListPage () {
 
 
     const loadData=async ({page,size})=>{
-        let {status,message,data}=await getUserPage({page:page,size:size});
+        let {status,message,data}=await getUserPage({page:page,size:size,type:0});
         console.log(data)
         if(status==0){
             setData(data);
@@ -80,7 +81,7 @@ export default function UserListPage () {
             dataIndex: 'avatar',
             key: 'avatar',
             render: (_, {avatar}) => (
-                <img src={avatar} style={{width:'50px',height:'50px'}}/>
+                <img src={avatar??(baseUrl+'/user_head.jpg')} style={{width:'50px',height:'50px'}}/>
             ),
         },
         {

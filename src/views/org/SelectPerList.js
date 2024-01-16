@@ -1,7 +1,7 @@
 import React, {useState,useEffect,useImperativeHandle} from "react"
 import {getPermissionListBySys, getRolePermissionList, setRolePermissionList} from "../../api/OrgAdminApi";
 import { notification,Button,Modal,Cascader} from "antd";
-import { getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg, getLocalSys} from "../../utils/StorageUtils";
 
 
 const { SHOW_CHILD } = Cascader;
@@ -38,7 +38,7 @@ export default function SelectPerList ({cref,onEditFinish}) {
 
 
    const loadData= async ()=>{
-       let {status,message,data}=await getPermissionListBySys({sysId:getOrg().sysId});
+       let {status,message,data}=await getPermissionListBySys({sysId:getLocalSys().id});
        if(status==0){
            data=coverData(data);
            //console.log(data)

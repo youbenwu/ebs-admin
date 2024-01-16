@@ -30,8 +30,8 @@ export default function RegisterHotelPage(){
         console.log('Failed:', errorInfo);
     };
     return (
-        <div className='hotel-register'>
-            <div className='content'>
+        <div className='hotel-register1'>
+            <div className='content1'>
                 <h2>酒店入驻</h2>
                 <Form
                     form={form}

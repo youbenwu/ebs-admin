@@ -1,6 +1,6 @@
 import React, {} from "react"
 import {Form, Input, notification, Space, Button, Modal, Checkbox} from "antd";
-import { saveUser} from "../../utils/StorageUtils";
+import { saveLocalUser} from "../../utils/StorageUtils";
 import {$login} from "../../api/UserApi";
 
 export default function UserRegisterPage () {
@@ -12,7 +12,7 @@ export default function UserRegisterPage () {
         let {status,message,data}=await $login(values);
         if(status==0){
             //保存登陆后的用户信息
-            saveUser(data);
+            saveLocalUser(data);
             notification.info({message:"系统提示",description:message});
             navigate('/');
         }else{

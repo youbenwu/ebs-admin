@@ -1,14 +1,33 @@
 import React, {useState,useEffect,useRef} from "react"
 
-import {getOrg} from "../../utils/StorageUtils";
-import {notification, Table, Space, Pagination, Popconfirm, Switch, Form, Input, Select} from "antd";
-import {Button} from 'antd'
+import {getLocalOrg} from "../../utils/StorageUtils";
+import {
+    notification,
+    Row,
+    Table,
+    Space,
+    Pagination,
+    Popconfirm,
+    Switch,
+    Form,
+    Input,
+    Select,
+    Tabs,
+    Tooltip
+} from "antd";
+import {Button,Radio} from 'antd'
 import {useNavigate} from 'react-router-dom'
 import './AdvertListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
-import {deleteAdvert, getAdvertChannelPage, getAdvertPage, setAdvertStatus} from "../../api/AdvertAdminApi";
+import {
+    deleteAdvert,
+    getAdvertChannelPage,
+    getAdvertPage, getStatsAdvertStatus,
+    setAdvertDisplay,
+} from "../../api/AdvertAdminApi";
 import AdvertEdit from "./AdvertEdit";
+import AdvertStatusEdit from "./AdvertStatusEdit";
 
 
 export default function AdvertListPage () {
@@ -17,9 +36,10 @@ export default function AdvertListPage () {
     const navigate=useNavigate();
     const [data,setData]=useState([]);
     const advertEdit=useRef();
+    const statusEdit=useRef();
 
     const history = createBrowserHistory();
-    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',orgId:getOrg().orgType==0?'':getOrg().orgId,channelId:''});
+    const [request,setRequest]=useState({page:0,size:10,status:'',keyword:'',channelId:'',display:'',type:''});
 
     const [form] = Form.useForm();
 
@@ -35,23 +55,29 @@ export default function AdvertListPage () {
         const status=filtersFromParams.status?filtersFromParams.status:request.status;
         const keyword=filtersFromParams.keyword?filtersFromParams.keyword:request.keyword;
         const channelId=filtersFromParams.channelId?filtersFromParams.channelId:request.channelId;
+        const display=filtersFromParams.display??'';
+        const type=filtersFromParams.type??'';
         request.page=page;
         request.size=size;
         request.status=status;
         request.keyword=keyword;
         request.channelId=channelId;
+        request.display=display;
+        request.type=type;
 
         form.setFieldsValue({
             'keyword':keyword,
             'channelId':channelId,
+            'display':display,
         });
-        loadData();
         loadChannelList();
     },[]);
 
 
     useEffect(()=>{
-        history.push(`?page=${request.page}&size=${request.size}&status=${request.status}&keyword=${request.keyword}&channelId=${request.channelId}`);
+        history.push(`?page=${request.page}&size=${request.size}&status=${request.status}&keyword=${request.keyword}&channelId=${request.channelId}&display=${request.display}&type=${request.type}`);
+        loadData().then();
+        loadStats().then();
     },[request]);
 
 
@@ -67,26 +93,45 @@ export default function AdvertListPage () {
         }
     }
 
+    const loadStats=async ()=>{
+        let {status,data}=await getStatsAdvertStatus(request);
+        console.log(data)
+        if(status==0){
+            let count=0;
+            data.forEach(s=>{
+                count+=s.count;
+                let tab=tabs.find(t=>t.key===(s.status+''))
+                if(tab){
+                    tab.label=(tab.label.split('(')[0])+'('+s.count+')';
+                }
+            })
+            tabs[0].label=(tabs[0].label.split('(')[0])+'('+count+')';
+            setTabs([...tabs]);
+            //console.log(tabs)
+        }
+    }
+
     const onDeleteAdvert= async({id})=>{
         let {status,message}=await deleteAdvert({id:id});
         if(status==0){
-            loadData({page:request.page,size:request.size});
+            loadData();
+            loadStats();
         }else{
             notification.error({message:"系统提示",description:message});
         }
     }
 
-    const onSetAdvertStatus=async (params)=>{
-        let {status,message}=await setAdvertStatus({id:params.id,status:params.status});
+    const onSetAdvertDisplay=async (params)=>{
+        let {status,message}=await setAdvertDisplay({id:params.id,display:params.display});
         if(status==0){
-            loadData({page:request.page,size:request.size});
+            loadData();
         }else{
             notification.error({message:"系统提示",description:message});
         }
     }
 
     const loadChannelList=async ()=>{
-        let type=getOrg().orgType==0?'':1;
+        let type=getLocalOrg().type==0?'':1;
         let {status,message,data}=await getAdvertChannelPage({type:type,page:0,size:50});
 
         if(status!=0){
@@ -107,24 +152,74 @@ export default function AdvertListPage () {
         request.page=page-1;
         request.size=pageSize;
         setRequest({...request});
-        loadData();
     }
 
-    const items = [
+
+
+
+    //状态 0--正常 2--未审核 3--审核中 4--审核失败 7--过期
+    const statsMap={
+        0:"正常",
+        2:"未审核",
+        3:"审核中",
+        4:"审核失败",
+        7:"过期",
+        8:"待订单完成",
+        9:"订单取消",
+    };
+
+    const statusView=(record)=>{
+        if(record.status<=4){
+            return (
+                <Space direction={"vertical"} style={{textAlign:'center'}}>
+                    {statsMap[record.status]}
+                    <Button size="small" onClick={()=>{statusEdit.current.showModel(record)}}>审核</Button>
+                </Space>
+            );
+        }else{
+            return (statsMap[record.status]);
+        }
+    }
+
+    const [tabs, setTabs] = useState([
         {
             key: '',
             label: '全部',
         },
         {
             key:'0',
-            label:'未上架',
+            label:'正常',
         },
         {
-            key:'1',
-            label:'已上架',
+            key:'2',
+            label:'未审核',
         },
-    ];
+        {
+            key:'3',
+            label:'审核中',
+        },
+        {
+            key:'4',
+            label:'审核失败',
+        },
+        {
+            key:'7',
+            label:'过期',
+        },
+        {
+            key:'8',
+            label:'待订单完成',
+        },
+        {
+            key:'9',
+            label:'订单取消',
+        },
+    ]);
 
+    const onChange = (key) => {
+        request.status=key;
+        setRequest({...request});
+    };
 
     const columns = [
         {
@@ -141,6 +236,14 @@ export default function AdvertListPage () {
             title: '标题',
             dataIndex: 'title',
             key: 'title',
+            ellipsis: {
+                showTitle: false,
+            },
+            render: (title) => (
+                <Tooltip placement="topLeft" title={title}>
+                    {title}
+                </Tooltip>
+            ),
         },
         {
             title: '图片',
@@ -151,22 +254,26 @@ export default function AdvertListPage () {
             ),
         },
         {
-            title: 'URL',
-            dataIndex: 'url',
-            key: 'url',
-        },
-        {
-            title: '更新时间',
-            dataIndex: 'updateTime',
-            key: 'updateTime',
+            title: '展示时间',
+            dataIndex: 'times',
+            key: 'times',
+            render: (_, {startTime,endTime}) => (
+                <>从{startTime}到{endTime}</>
+            ),
         },
         {
             title: '状态',
-            dataIndex: 'status',
             key: 'status',
-            render: (_, {id,status}) => (
-                <Switch checked={status==1} checkedChildren="已上架" unCheckedChildren="未上架" onChange={(v)=>{
-                   onSetAdvertStatus({id:id,status:v?1:0});
+            render: (_, record) => statusView(record),
+
+        },
+        {
+            title: '上下架',
+            dataIndex: 'display',
+            key: 'display',
+            render: (_, {id,display}) => (
+                <Switch checked={display} checkedChildren="已上架" unCheckedChildren="未上架" onChange={(v)=>{
+                   onSetAdvertDisplay({id:id,display:v?true:false});
                 }}/>
             ),
         },
@@ -193,6 +300,49 @@ export default function AdvertListPage () {
         },
     ];
 
+
+    const handleDisplayChange=(e)=>{
+        //console.log(e)
+        request.display=e.target.value;
+        setRequest({...request});
+    }
+
+    const handleTypeChange=(e)=>{
+        //console.log(e)
+        request.type=e.target.value;
+        setRequest({...request});
+    }
+
+    const Display=(
+        <Radio.Group
+            onChange={handleDisplayChange}
+            value={request.display}
+            style={{
+                marginBottom: 8,
+            }}
+        >
+            <Radio.Button value={''}>全部</Radio.Button>
+            <Radio.Button value={true}>已上架</Radio.Button>
+            <Radio.Button value={false}>已下架</Radio.Button>
+        </Radio.Group>
+    )
+
+    const TypeSelects=(
+        <Radio.Group
+            onChange={handleTypeChange}
+            value={request.type}
+            style={{
+                marginBottom: 8,
+            }}
+        >
+            <Radio.Button value={''}>全部</Radio.Button>
+            <Radio.Button value={0}>平台广告</Radio.Button>
+            <Radio.Button value={1}>企业广告</Radio.Button>
+            <Radio.Button value={2}>个人广告</Radio.Button>
+            <Radio.Button value={3}>酒店广告</Radio.Button>
+        </Radio.Group>
+    )
+
     return (
         <>
             <div className="header">
@@ -205,7 +355,6 @@ export default function AdvertListPage () {
                             request.keyword=values.keyword?values.keyword:'';
                             request.channelId=values.channelId?values.channelId:'';
                             setRequest({...request});
-                            loadData();
                         }}
                         style={{
                             maxWidth: 600,
@@ -259,6 +408,10 @@ export default function AdvertListPage () {
                 </div>
                 <Button onClick={()=>{advertEdit.current.showModel({data:{}})}}>新增</Button>
             </div>
+            <Row>
+                {TypeSelects}&nbsp;&nbsp;&nbsp;&nbsp;{Display}
+            </Row>
+            <Tabs type="card" activeKey={request.status} defaultActiveKey={request.status}  items={tabs} onChange={onChange} />
             <Table columns={columns} dataSource={data.content} pagination={false}/>
             <Pagination
                 style={{marginTop:"10px"}}
@@ -272,7 +425,12 @@ export default function AdvertListPage () {
                 onChange={onPageChange}
             />
             <AdvertEdit cref={advertEdit} onEditFinish={(r)=>{if(r)loadData()}}/>
-
+            <AdvertStatusEdit cref={statusEdit} onEditFinish={(r)=>{
+                if(r){
+                    loadData()
+                    loadStats()
+                }
+            }}/>
         </>
     );
 

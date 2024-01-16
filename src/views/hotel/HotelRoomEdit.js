@@ -1,6 +1,6 @@
 import React, {useState,useImperativeHandle} from "react"
 import { Form, Input, notification, Space,Button,Modal,Select} from "antd";
-import { getHotel} from "../../utils/StorageUtils";
+import { getLocalHotel} from "../../utils/StorageUtils";
 import MyUpload from "../../components/MyUpload/MyUpload";
 import {getHotelRoomTypePage, saveHotelRoom} from "../../api/HotelAdminApi";
 
@@ -24,7 +24,7 @@ export default function HotelRoomEdit ({cref,onEditFinish}) {
 
    const openModel=({data})=>{
        if(data.hotelId==null){
-           data.hotelId=getHotel()?.id;
+           data.hotelId=getLocalHotel()?.id;
        }
        setOpen(true);
        form.setFieldsValue({

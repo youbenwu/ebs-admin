@@ -4,17 +4,17 @@ import { Button, Form, Input,notification,Space } from 'antd';
 import {useNavigate} from 'react-router-dom'
 import MyUpload from "../../components/MyUpload/MyUpload";
 import {sendMessage} from "../../api/MessageAdminApi";
-import {getOrg,getUser} from "../../utils/StorageUtils";
+import {getLocalOrg,getLocalUser} from "../../utils/StorageUtils";
 
 export default function MsgSendPage(){
     const navigate=useNavigate();
     const [form] = Form.useForm();
 
     useEffect(()=>{
-        let orgId=getOrg().orgType==0?'':getOrg().orgId;
+        let orgId=getLocalOrg().type==0?'':getLocalOrg().id;
         form.setFieldsValue({
             'orgId':orgId,
-            'fromId':getUser().id,
+            'fromId':getLocalUser().id,
         });
     },[])
 
@@ -37,8 +37,8 @@ export default function MsgSendPage(){
         console.log('Failed:', errorInfo);
     };
     return (
-        <div className='hotel-register'>
-            <div className='content'>
+        <div className='content'>
+            <div className='send-msg'>
                 <h2>发送消息</h2>
                 <Form
                     form={form}

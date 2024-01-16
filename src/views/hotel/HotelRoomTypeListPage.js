@@ -6,7 +6,7 @@ import './HotelRoomTypeListPage.scss'
 import {createBrowserHistory} from "history";
 import qs from "qs";
 import {deleteHotelRoomType, getHotelRoomTypePage} from "../../api/HotelAdminApi";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import HotelRoomTypeEdit from "./HotelRoomTypeEdit";
 
 
@@ -48,7 +48,7 @@ export default function HotelRoomTypeListPage () {
 
     const loadData=async ()=>{
 
-        let {status,message,data}=await getHotelRoomTypePage({...request,hotelId:getHotel()?.id,sort:"updateTime,desc"});
+        let {status,message,data}=await getHotelRoomTypePage({...request,hotelId:getLocalHotel()?.id,sort:"updateTime,desc"});
         console.log(data)
         if(status==0){
             setData(data);

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getCategoryList, delCategory } from "../../../api/ShopApi";
 import { Button, Tabs, Table, Space, Popconfirm, Form, Input } from "antd";
 import ShopCategoryEdit from "./ShopCategoryEdit";
-import { getHotel } from "../../../utils/StorageUtils";
+import { getLocalHotel } from "../../../utils/StorageUtils";
 
 export default function ShopCategoryList() {
   const shopCategoryEdit = useRef();
@@ -17,7 +17,7 @@ export default function ShopCategoryList() {
 
   const getList = () => {
     getCategoryList({
-      shopId: getHotel().shopId,
+      shopId: getLocalHotel().shopId,
       productType,
       keyword,
     }).then((res) => {
@@ -25,7 +25,7 @@ export default function ShopCategoryList() {
     });
   };
   const onDelete = (e) => {
-    delCategory({ shopId: getHotel().shopId, id: e.id }).then((res) => {
+    delCategory({ shopId: getLocalHotel().shopId, id: e.id }).then((res) => {
       getList();
     });
   };

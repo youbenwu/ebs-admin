@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react"
 import {$getOrg} from "../../api/OrgAdminApi";
-import {getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg} from "../../utils/StorageUtils";
 import {notification} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
@@ -16,7 +16,7 @@ export default function OrgPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let {status,message,data}=await $getOrg({id:getOrg().orgId});
+        let {status,message,data}=await $getOrg({id:getLocalOrg().id});
         if(status==0){
             setData(data);
         }else{

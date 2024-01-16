@@ -5,4 +5,6 @@
 
 export const baseUrl='http://api.qyhuyu.cn';
 
+//export const baseUrl='http://qy.outmao.cn:9900';
+
 //export const baseUrl='http://http://139.9.100.168:9900';

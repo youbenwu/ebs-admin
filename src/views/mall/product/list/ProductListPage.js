@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useRef} from "react"
-import {notification, Table, Space,Tooltip} from "antd";
+import {notification, Table, Space, Tooltip, Switch} from "antd";
 import {Button} from 'antd'
 import { createBrowserHistory } from "history";
 import {useNavigate} from 'react-router-dom'
 import qs from "qs";
 import "./ProductListPage.scss"
-import {deleteProduct, getProductPage} from "../../../../api/ProductAdminApi";
+import {$setProductOnSell, deleteProduct, getProductPage} from "../../../../api/ProductAdminApi";
 import MyDeleteButton from "../../../../components/buttons/MyDeleteButton";
 
 export default function ProductListPage () {
@@ -53,6 +53,17 @@ export default function ProductListPage () {
     const onDelete= async({id})=>{
         setLoading(true);
         let {status,message}=await deleteProduct({id:id});
+        setLoading(false);
+        if(status==0){
+            loadData().then();
+        }else{
+            notification.error({message:"系统提示",description:message});
+        }
+    }
+
+    const setOnSell= async({id,onSell})=>{
+        setLoading(true);
+        let {status,message}=await $setProductOnSell({id:id,onSell:onSell});
         setLoading(false);
         if(status==0){
             loadData().then();
@@ -149,6 +160,16 @@ export default function ProductListPage () {
             key: 'status',
             render: (_, {status,statusRemark}) => (
                 (statusRemark??statsMap[status])
+            ),
+        },
+        {
+            title: '上下架',
+            dataIndex: 'onSell',
+            key: 'onSell',
+            render: (_, {id,onSell}) => (
+                <Switch checked={onSell} checkedChildren="已上架" unCheckedChildren="未上架" onChange={(v)=>{
+                    setOnSell({id:id,onSell:v}).then();
+                }}/>
             ),
         },
         {

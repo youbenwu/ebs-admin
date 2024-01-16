@@ -1,6 +1,6 @@
 import {useState,useEffect,useRef} from "react"
 import {deleteRole, getRoleList} from "../../api/OrgAdminApi";
-import {getOrg} from "../../utils/StorageUtils";
+import {getLocalOrg} from "../../utils/StorageUtils";
 import {notification, Table, Space, Popconfirm} from "antd";
 import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
@@ -25,7 +25,7 @@ export default function RoleListPage () {
 
 
     const loadData=async ()=>{
-        let {status,message,data}=await getRoleList({orgId:getOrg()?.orgId});
+        let {status,message,data}=await getRoleList({orgId:getLocalOrg().id});
         console.log(data)
         if(status==0){
             setData(data);

@@ -4,7 +4,7 @@ import {Button} from 'antd'
 import {useNavigate} from 'react-router-dom'
 import HotelEdit from "./HotelEdit"
 import './HotelPage.scss'
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 import {getHotelInfo} from "../../api/HotelAdminApi";
 
 export default function HotelPage () {
@@ -19,7 +19,7 @@ export default function HotelPage () {
     const [data,setData]=useState({});
 
     const loadData=async ()=>{
-        let hotel=getHotel();
+        let hotel=getLocalHotel();
         console.log(hotel)
         let {status,message,data}=await getHotelInfo({id:hotel.id});
         if(status==0){

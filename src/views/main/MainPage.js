@@ -5,6 +5,7 @@ import "./MainPage.scss"
 import { createFromIconfontCN ,MenuUnfoldOutlined,MenuFoldOutlined} from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import {getMenuList} from "../../api/MenuApi";
+import {getLocalSys} from "../../utils/StorageUtils";
 
 
 
@@ -21,6 +22,10 @@ export default function MainPage(){
 
     useEffect(()=>{
         if(!localStorage.getItem("user")){
+            navigate('/login');
+        }
+        const domainPrefix = window.location.hostname.split('.')[0];
+        if(getLocalSys()?.sysNo!==domainPrefix){
             navigate('/login');
         }
         loadMenus();

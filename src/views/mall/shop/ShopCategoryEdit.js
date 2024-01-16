@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle } from "react";
 import { Button, Modal, Form, Input, Select, notification } from "antd";
 import { setCategory } from "../../../api/ShopApi";
-import { getHotel } from "../../../utils/StorageUtils";
+import { getLocalHotel } from "../../../utils/StorageUtils";
 
 export default function ShopCategoryEdit({ cref, onEditFinish }) {
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function ShopCategoryEdit({ cref, onEditFinish }) {
     let { status, message } = await setCategory({
       title: values.title,
       productType: values.productType,
-      shopId: getHotel().shopId,
+      shopId: getLocalHotel().shopId,
       id,
     });
     setLoading(false);

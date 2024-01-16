@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle } from "react";
 import { Button, Modal, Form, Input, Select, notification, Space } from "antd";
 import { productSave, productGet } from "../../../api/ShopApi";
-import { getHotel } from "../../../utils/StorageUtils";
+import { getLocalHotel } from "../../../utils/StorageUtils";
 import MyUploadList from "../../../components/MyUpload/MyUploadList";
 import { CloseOutlined } from "@ant-design/icons";
 
@@ -45,7 +45,7 @@ export default function ShopCategoryEdit({ cref, onEditFinish, categoryList }) {
   const onFinish = async (values) => {
     setLoading(true);
     let { status, message } = await productSave({
-      shopId: getHotel().shopId,
+      shopId: getLocalHotel().shopId,
       id,
       title: values.title,
       spcId: values.spcId,

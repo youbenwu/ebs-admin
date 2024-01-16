@@ -7,7 +7,7 @@ import {createBrowserHistory} from "history";
 import qs from "qs";
 import {getHotelDevicePage} from "../../api/HotelAdminApi";
 import HotelDeviceEdit from "./HotelDeviceEdit";
-import {getHotel} from "../../utils/StorageUtils";
+import {getLocalHotel} from "../../utils/StorageUtils";
 
 
 export default function HotelDeviceListPage () {
@@ -45,7 +45,7 @@ export default function HotelDeviceListPage () {
 
 
     const loadData=async ()=>{
-        let {status,message,data}=await getHotelDevicePage({...request,hotelId:getHotel()?.id,sort:"updateTime,desc"});
+        let {status,message,data}=await getHotelDevicePage({...request,hotelId:getLocalHotel()?.id,sort:"updateTime,desc"});
         console.log(data)
         if(status==0){
             setData(data);

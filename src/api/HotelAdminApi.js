@@ -175,7 +175,7 @@ export const deleteHotelCustomer=async (params)=>{
 // /api/admin/hotel/device/page
 // 获取设备列表
 export const getHotelDevicePage=async (params)=>{
-    let {data}=await axios.postForm('/api/admin/hotel/device/page',params);
+    let {data}=await axios.post('/api/admin/hotel/device/page',params);
     return data;
 }
 

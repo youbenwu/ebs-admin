@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { getHotel } from "../../../utils/StorageUtils";
+import { getLocalHotel } from "../../../utils/StorageUtils";
 import {
   productPage,
   getCategoryList,
@@ -39,7 +39,7 @@ export default function ShopList() {
 
   const getList = async () => {
     const { data } = await getCategoryList({
-      shopId: getHotel().shopId,
+      shopId: getLocalHotel().shopId,
     });
     setCategoryList(data);
   };
@@ -49,7 +49,7 @@ export default function ShopList() {
       keyword,
       size,
       page: page - 1,
-      shopId: getHotel().shopId,
+      shopId: getLocalHotel().shopId,
     });
     setDatas(data);
   };
@@ -110,7 +110,7 @@ export default function ShopList() {
             title="提示"
             description="确定删除该条记录吗?"
             onConfirm={() => {
-              productDelete({ shopId: getHotel().shopId, id: record.id }).then(
+              productDelete({ shopId: getLocalHotel().shopId, id: record.id }).then(
                 (res) => {
                   loadData();
                 }
